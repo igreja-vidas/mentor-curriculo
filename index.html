@@ -53,6 +53,7 @@ header.top{position:sticky;top:0;z-index:20;background:#0F1B33;color:#F3EBD3;bor
 .top-sp{flex:1}
 .ico{background:transparent;border:1px solid rgba(243,235,211,.25);color:#F3EBD3;border-radius:10px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;font-size:18px}
 .ico:hover{border-color:#C9A227}
+.ico.sair{width:auto;padding:0 12px;font-size:14px;font-weight:600}
 
 main{max-width:1180px;margin:0 auto;padding:20px 16px 80px}
 
@@ -108,6 +109,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
 .disc:hover{transform:translateY(-2px);border-color:var(--gold)}
 .disc h3{font-size:22px;margin:4px 0 8px}
 .dots{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+.dot.lbl{width:auto;padding:0 9px;font-weight:600}
 .dot{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--surface2);border:1px solid var(--line);color:var(--muted)}
 .dot.on{background:var(--gold-soft);color:var(--gold-ink);border-color:transparent}
 .dot.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
@@ -180,6 +182,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
     <div class="top-sp"></div>
     <button class="ico" id="btnTema" title="Modo claro/escuro" onclick="alternarTema()">☀</button>
     <button class="ico" id="btnAjustes" title="Ajustes" onclick="abrirAjustes()">⚙</button>
+    <button class="ico sair hidden" id="btnSair" title="Sair da conta" onclick="sairConta()">Sair</button>
   </div>
 </header>
 <main id="app"></main>
@@ -188,7 +191,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
 /* =====================================================================
    MENTOR CURRÍCULO
    ===================================================================== */
-const APP_VERSION = "1.1.0";
+const APP_VERSION = "1.2.0";
 
 // ---- Supabase da Igreja Vidas — projeto do MENTOR (URL e chave pública) ----
 const SUPABASE_URL = "https://oekcqkebsjxmsoqdphkd.supabase.co";
@@ -322,7 +325,7 @@ function telaConfigSupabase() {
     <button class="btn pri" onclick="ls.set('mc_sb_url',$('#sbu').value.trim());ls.set('mc_sb_key',$('#sbk').value.trim());location.reload()">Salvar e continuar</button></div>`;
 }
 function telaLogin() {
-  $("#btnAjustes").classList.add("hidden");
+  $("#btnAjustes").classList.add("hidden"); $("#btnSair").classList.add("hidden");
   $("#app").innerHTML = `<div class="login card stack">
     <div class="logo"><img src="icone.png" alt=""><div class="eyebrow">Escola MENTOR</div><h1>Currículo</h1>
     <p class="muted small" style="margin:0">Ementas, apostilas, quizzes, podcasts e planos de aula</p></div>
@@ -346,9 +349,15 @@ function traduzErro(m) {
   return m;
 }
 async function sair() { await S.sb.auth.signOut(); location.reload(); }
+async function sairConta() {
+  if (S.busy) return toast("Aguarde a geração terminar (ou toque em Parar) antes de sair.");
+  if (S.editando && !confirm("Há uma edição não salva. Sair mesmo assim?")) return;
+  if (await confirmar("Sair da conta", `Você está conectado como <b>${esc(S.user.email)}</b>. Para voltar, entre de novo com e-mail e senha.`, "Sair")) sair();
+}
 
 async function posLogin() {
-  $("#btnAjustes").classList.remove("hidden");
+  $("#btnAjustes").classList.remove("hidden"); $("#btnSair").classList.remove("hidden");
+  $("#btnSair").title = "Sair da conta (" + S.user.email + ")";
   const { data, error } = await S.sb.from("mc_config").select("*").eq("user_id", S.user.id).maybeSingle();
   if (error) { $("#app").innerHTML = `<div class="card note warn">Erro ao ler os ajustes: ${esc(traduzErro(error.message))}</div>`; return; }
   if (!data) {
@@ -391,14 +400,21 @@ function cardDisc(d) {
   const docs = S.resumoDocs[d.id] || [];
   const u = n => docs.find(x => x.tipo === "unidade" && x.unidade === n);
   const temTipo = t => docs.some(x => x.tipo === t);
-  const dot = (txt, st) => `<span class="dot ${st}" title="${txt}">${txt}</span>`;
+  const dot = (txt, st) => `<span class="dot ${st}" title="Unidade ${txt.slice(1)} da apostila">${txt}</span>`;
+  const conta = t => docs.filter(x => x.tipo === t).length;
+  const revisados = t => docs.filter(x => x.tipo === t && x.status === "revisada").length;
+  // verde = completo e todo revisado; dourado = existe, mas falta gerar ou revisar algo
+  const selo = (nome, t, max) => {
+    const n = conta(t), r = revisados(t), st = n ? (n >= max && r >= max ? "ok" : "on") : "";
+    return `<span class="dot lbl ${st}" title="${nome}: ${n} de ${max} gerado(s), ${r} revisado(s)">${nome}${max > 1 ? " " + n + "/" + max : n ? " ✓" : ""}</span>`;
+  };
   return `<div class="card disc" onclick="abrirDisciplina('${d.id}')">
     <div class="eyebrow">${d.carga_horaria ? esc(d.carga_horaria) : "Disciplina"}</div>
     <h3>${esc(d.nome)}</h3>
     <div class="row">${d.ementa_aprovada ? `<span class="tag ok">Ementa aprovada</span>` : `<span class="tag">Ementa em preparo</span>`}${S.custoDisc?.[d.id] ? `<span class="tag gold">${fmtUSD(S.custoDisc[d.id])}</span>` : ""}</div>
     <div class="dots">
       ${[1, 2, 3, 4].map(n => { const x = u(n); return dot("U" + n, x ? (x.status === "revisada" ? "ok" : "on") : ""); }).join("")}
-      ${dot("Q", temTipo("quiz") ? "on" : "")}${dot("P", temTipo("podcast") ? "on" : "")}${dot("A", temTipo("planos") ? "on" : "")}${dot("T", temTipo("trabalhos") ? "on" : "")}
+      ${selo("Quizzes", "quiz", 4)}${selo("Podcasts", "podcast", 4)}${selo("Aulas", "planos", 1)}${selo("Trabalhos", "trabalhos", 1)}
     </div>
     <div class="muted small" style="margin-top:8px">Atualizada em ${dataBR(d.updated_at)}</div></div>`;
 }
@@ -1528,7 +1544,7 @@ function abrirAjustes() {
   const temChave = !!ls.get("mc_anthropic_key");
   modal(`<h3>Ajustes</h3><div class="stack">
     <div class="note">Versão instalada: <b>v${APP_VERSION}</b> <span id="ajVer" class="muted"></span></div>
-    <div class="row"><button class="btn sm" onclick="atualizarApp()">↻ Atualizar app</button><button class="btn sm" onclick="sair()">Sair (${esc(S.user.email)})</button></div>
+    <div class="row"><button class="btn sm" onclick="atualizarApp()">↻ Atualizar app</button><button class="btn sm danger" onclick="sairConta()">Sair da conta (${esc(S.user.email)})</button></div>
     <hr style="border:0;border-top:1px solid var(--line);width:100%">
     <div><label class="f">Chave da API da Anthropic <span class="muted">(fica só neste aparelho)</span></label>
       <input type="password" id="ajK" placeholder="${temChave ? "•••••••• (já salva; cole outra para trocar)" : "sk-ant-..."}">
