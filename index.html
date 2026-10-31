@@ -1,0 +1,1469 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MENTOR Currículo</title>
+<meta name="theme-color" content="#0F1B33">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Currículo">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icone.png">
+<link rel="apple-touch-icon" href="icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.99.3/dist/umd/supabase.js"></script>
+<style>
+:root{
+  --bg:#F6F2E8; --surface:#FFFFFF; --surface2:#FBF8F1; --ink:#1A2133; --muted:#636B7C;
+  --line:#E3DCCB; --navy:#0F1B33; --gold:#C9A227; --gold-ink:#8A6D0F; --gold-soft:#F4ECD3;
+  --ok:#2E7D4F; --ok-soft:#E3F2E8; --warn:#A5610B; --warn-soft:#FBEFD9; --bad:#B3261E; --bad-soft:#FBE4E2;
+  --shadow:0 1px 2px rgba(15,27,51,.06),0 6px 20px rgba(15,27,51,.06);
+  --radius:14px;
+}
+:root[data-theme="dark"]{
+  --bg:#0A1120; --surface:#111B2E; --surface2:#0E1728; --ink:#E8E3D5; --muted:#9AA3B5;
+  --line:#22304A; --navy:#E8E3D5; --gold:#D9B748; --gold-ink:#E3C462; --gold-soft:#2A2614;
+  --ok:#6FCF97; --ok-soft:#14301F; --warn:#F2B35B; --warn-soft:#33260F; --bad:#F28B82; --bad-soft:#3A1715;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1120; --surface:#111B2E; --surface2:#0E1728; --ink:#E8E3D5; --muted:#9AA3B5;
+    --line:#22304A; --navy:#E8E3D5; --gold:#D9B748; --gold-ink:#E3C462; --gold-soft:#2A2614;
+    --ok:#6FCF97; --ok-soft:#14301F; --warn:#F2B35B; --warn-soft:#33260F; --bad:#F28B82; --bad-soft:#3A1715;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:16px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--gold-ink)}
+.hidden{display:none!important}
+
+/* Topo */
+header.top{position:sticky;top:0;z-index:20;background:#0F1B33;color:#F3EBD3;border-bottom:2px solid #C9A227}
+.top-in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;min-width:0}
+.brand img{width:34px;height:34px;border-radius:8px}
+.brand b{font-family:Cinzel,serif;font-weight:600;letter-spacing:.08em;font-size:17px;white-space:nowrap}
+.brand small{display:block;font-size:11px;letter-spacing:.12em;color:#C9A227;text-transform:uppercase}
+.ver{font-size:12px;border:1px solid rgba(201,162,39,.6);color:#E8D18A;border-radius:99px;padding:1px 8px;white-space:nowrap}
+.top-sp{flex:1}
+.ico{background:transparent;border:1px solid rgba(243,235,211,.25);color:#F3EBD3;border-radius:10px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;font-size:18px}
+.ico:hover{border-color:#C9A227}
+
+main{max-width:1180px;margin:0 auto;padding:20px 16px 80px}
+
+/* Faixa de atualização */
+.upd{background:#C9A227;color:#0F1B33;text-align:center;padding:8px 16px;font-weight:600;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+.upd button{background:#0F1B33;color:#F3EBD3;border:0;border-radius:8px;padding:5px 12px;cursor:pointer;font-weight:600}
+
+/* Básicos */
+h1,h2,h3{font-family:"Cormorant Garamond",serif;color:var(--navy);margin:0}
+h1{font-size:34px;font-weight:700;line-height:1.1}
+h2{font-size:26px;font-weight:700}
+h3{font-size:20px;font-weight:700}
+.eyebrow{font-family:Cinzel,serif;font-size:12px;letter-spacing:.16em;color:var(--gold-ink);text-transform:uppercase}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.stack>*+*{margin-top:14px}
+label.f{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+label.f .muted{font-weight:400}
+input[type=text],input[type=email],input[type=password],input[type=number],select,textarea{
+  width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
+textarea{resize:vertical;min-height:90px;line-height:1.5}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 25%,transparent)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{border-color:var(--gold)}
+.btn.pri{background:#0F1B33;color:#F3EBD3;border-color:#0F1B33}
+:root[data-theme="dark"] .btn.pri{background:#C9A227;color:#0F1B33;border-color:#C9A227}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.pri{background:#C9A227;color:#0F1B33;border-color:#C9A227}}
+.btn.gold{background:#C9A227;color:#0F1B33;border-color:#C9A227}
+.btn.danger{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 40%,var(--line))}
+.btn.ghost{background:transparent}
+.btn.sm{padding:6px 10px;font-size:14px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;border-radius:99px;padding:2px 9px;background:var(--surface2);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.tag.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.tag.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.tag.gold{background:var(--gold-soft);color:var(--gold-ink);border-color:transparent}
+.note{border-left:3px solid var(--gold);background:var(--gold-soft);padding:10px 14px;border-radius:0 10px 10px 0;font-size:14px}
+.note.warn{border-color:var(--warn);background:var(--warn-soft)}
+
+/* Login */
+.login{max-width:420px;margin:8vh auto 0}
+.login .logo{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:18px;text-align:center}
+.login .logo img{width:84px;height:84px;border-radius:18px;box-shadow:var(--shadow)}
+
+/* Lista de disciplinas */
+.disc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:16px}
+.disc{cursor:pointer;transition:transform .12s,border-color .12s}
+.disc:hover{transform:translateY(-2px);border-color:var(--gold)}
+.disc h3{font-size:22px;margin:4px 0 8px}
+.dots{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+.dot{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--surface2);border:1px solid var(--line);color:var(--muted)}
+.dot.on{background:var(--gold-soft);color:var(--gold-ink);border-color:transparent}
+.dot.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+
+/* Disciplina */
+.disc-head{display:flex;gap:14px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.steps{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:thin}
+.step{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 14px;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:8px}
+.step .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--surface2);border:1px solid var(--line)}
+.step.on{background:#0F1B33;color:#F3EBD3;border-color:#0F1B33}
+.step.on .n{background:#C9A227;color:#0F1B33;border-color:#C9A227}
+:root[data-theme="dark"] .step.on{background:var(--gold-soft);color:var(--gold-ink);border-color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .step.on{background:var(--gold-soft);color:var(--gold-ink);border-color:var(--gold)}}
+.step.done .n{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 14px;cursor:pointer;font-weight:600;font-size:14px;display:flex;gap:6px;align-items:center}
+.pill.on{border-color:var(--gold);background:var(--gold-soft);color:var(--gold-ink)}
+
+/* Ementa (formulário) */
+.unit-card{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--surface2)}
+.unit-card h4{margin:0 0 10px;font-family:Cinzel,serif;font-size:13px;letter-spacing:.12em;color:var(--gold-ink)}
+.sec-row{display:grid;grid-template-columns:28px 1fr;gap:8px;margin-top:10px}
+.sec-row .num{font-weight:700;color:var(--gold-ink);padding-top:9px;font-size:14px}
+.sec-row textarea{min-height:56px;font-size:14px}
+
+/* Leitura */
+.reader{font-family:Lora,Georgia,serif;font-size:17px;line-height:1.75;max-width:820px}
+.reader h1{font-size:32px;margin:6px 0 14px;font-family:"Cormorant Garamond",serif}
+.reader h2{font-size:25px;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.reader h3{font-size:20px;margin:22px 0 8px;font-family:"Source Sans 3",sans-serif;font-weight:700;color:var(--gold-ink)}
+.reader h4{font-size:17px;margin:18px 0 6px;font-family:"Source Sans 3",sans-serif}
+.reader p{margin:0 0 14px}
+.reader ul,.reader ol{margin:0 0 14px;padding-left:26px}
+.reader li{margin:4px 0}
+.reader blockquote{margin:14px 0;padding:8px 16px;border-left:3px solid var(--gold);background:var(--gold-soft);border-radius:0 10px 10px 0;font-style:italic}
+.reader table{border-collapse:collapse;width:100%;margin:14px 0;font-family:"Source Sans 3",sans-serif;font-size:15px;line-height:1.45}
+.reader th,.reader td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+.reader th{background:var(--gold-soft)}
+.reader hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+.blk{position:relative}
+.blk-tools{position:absolute;right:0;top:30px;opacity:0;transition:opacity .15s}
+.blk:hover .blk-tools{opacity:1}
+@media (hover:none){.blk-tools{opacity:1;position:static;margin:-4px 0 10px}}
+.toolbar{position:sticky;top:62px;z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:16px}
+.live{border:1px dashed var(--gold);border-radius:12px;padding:16px 20px;max-height:62vh;overflow:auto;background:var(--surface)}
+.prog{height:6px;background:var(--surface2);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.prog>i{display:block;height:100%;background:linear-gradient(90deg,#C9A227,#E7CC6E);width:0;transition:width .4s}
+.editor{min-height:60vh;font-family:ui-monospace,Menlo,monospace;font-size:14px;line-height:1.6}
+.empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+
+/* Modal e aviso */
+.modal-bg{position:fixed;inset:0;background:rgba(5,10,20,.55);z-index:50;display:grid;place-items:center;padding:16px}
+.modal{background:var(--surface);border-radius:16px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.modal h3{margin-bottom:10px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0F1B33;color:#F3EBD3;padding:10px 18px;border-radius:12px;z-index:60;box-shadow:var(--shadow);border:1px solid #C9A227;max-width:92vw}
+.spin{width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:sp 0.8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="updBar" class="upd hidden">Há uma versão nova do app (<span id="updVer"></span>). <button onclick="atualizarApp()">Atualizar agora</button></div>
+<header class="top">
+  <div class="top-in">
+    <div class="brand" onclick="irInicio()">
+      <img src="icone.png" alt="">
+      <div><b>MENTOR Currículo</b><small>Curso Teológico</small></div>
+    </div>
+    <span class="ver" id="verTag"></span>
+    <div class="top-sp"></div>
+    <button class="ico" id="btnTema" title="Modo claro/escuro" onclick="alternarTema()">☀</button>
+    <button class="ico" id="btnAjustes" title="Ajustes" onclick="abrirAjustes()">⚙</button>
+  </div>
+</header>
+<main id="app"></main>
+
+<script>
+/* =====================================================================
+   MENTOR CURRÍCULO
+   ===================================================================== */
+const APP_VERSION = "1.0.0";
+
+// ---- Supabase da Igreja Vidas — projeto do MENTOR (URL e chave pública) ----
+const SUPABASE_URL = "https://oekcqkebsjxmsoqdphkd.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_LtTwc12re1bLdZ8QYfOkcA_UHsES5W3";
+
+const MODELOS = [
+  { id: "claude-sonnet-5-5", nome: "Claude Sonnet 5.5 (equilibrado, recomendado)" },
+  { id: "claude-opus-5-5", nome: "Claude Opus 5.5 (máxima qualidade, mais caro)" },
+  { id: "claude-haiku-5-5", nome: "Claude Haiku 5.5 (rápido e barato, para testes)" }
+];
+
+const PERFIL_PADRAO = `Você é o MENTOR Acadêmico, especialista em educação teológica cristã, produção de material didático, elaboração de apostilas, planejamento acadêmico, avaliação educacional e formação ministerial. Você produz o material do Curso Teológico da Escola MENTOR (Ministério, Ensino, Teologia e Orientação), da Igreja Vidas.
+
+Perfil teológico: perspectiva evangélica conservadora, compatível com a tradição Batista e Pentecostal Clássica. A Bíblia é a principal fonte de autoridade. Evite tendências liberais, desconstrucionistas ou incompatíveis com a autoridade das Escrituras. Ao tratar de pontos em que batistas e pentecostais divergem (por exemplo, dons espirituais e batismo no Espírito Santo), apresente as posições com respeito e clareza, sem caricaturas.
+
+Perfil acadêmico: atue como professor de Teologia, coordenador acadêmico, designer instrucional, autor de apostilas e avaliador educacional. A Escola MENTOR usa um modelo híbrido (presencial e EAD): a apostila é a principal ferramenta de aprendizagem no estudo autônomo, por isso deve ser profunda o bastante para que o aluno compreenda o conteúdo sem a presença constante do professor.
+
+Linguagem: português brasileiro, acadêmica e acessível, adequada a alunos de formação ministerial. Explique, desenvolva, exemplifique, compare e aplique cada conceito; não se limite a listar informações.
+
+Padrão de qualidade: biblicamente fiel, teologicamente sólido, academicamente organizado, didaticamente claro e aplicável ao ministério cristão.`;
+
+const REGRA_FONTES = `Honestidade com as fontes: não invente citações literais, números de página, edições ou obras. Ao mencionar um autor, cite apenas autor e obra. Só sugira obras que você tem certeza de que existem, de preferência em português e de editoras evangélicas reconhecidas.`;
+
+/* ---------------- Estado ---------------- */
+const S = {
+  sb: null, user: null, cfg: null,
+  discs: [], resumoDocs: {},
+  d: null, docs: {},
+  aba: "biblio", uni: 1, matTipo: "quiz", matUni: 1,
+  editando: null, busy: false, abort: null, live: ""
+};
+
+/* ---------------- Utilidades ---------------- */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const palavras = t => (String(t || "").trim().match(/\S+/g) || []).length;
+const fmtN = n => Number(n || 0).toLocaleString("pt-BR");
+const ls = {
+  get(k, d = null) { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+};
+function toast(msg, ms = 3200) {
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
+  document.body.appendChild(t); setTimeout(() => t.remove(), ms);
+}
+function modal(html, onMount) {
+  const bg = document.createElement("div"); bg.className = "modal-bg";
+  bg.innerHTML = `<div class="modal">${html}</div>`;
+  document.body.appendChild(bg);
+  const close = () => bg.remove();
+  bg.addEventListener("click", e => { if (e.target === bg && !S.busy) close(); });
+  onMount && onMount(bg.firstElementChild, close);
+  return close;
+}
+function confirmar(titulo, texto, rotulo = "Confirmar", perigo = false) {
+  return new Promise(res => {
+    modal(`<h3>${esc(titulo)}</h3><p class="muted">${texto}</p>
+      <div class="row" style="justify-content:flex-end;margin-top:16px">
+      <button class="btn" data-n>Cancelar</button>
+      <button class="btn ${perigo ? "danger" : "pri"}" data-s>${esc(rotulo)}</button></div>`,
+      (m, close) => {
+        $("[data-n]", m).onclick = () => { close(); res(false); };
+        $("[data-s]", m).onclick = () => { close(); res(true); };
+      });
+  });
+}
+function dataBR(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return d.toLocaleDateString("pt-BR") + " " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}
+
+/* ---------------- Tema ---------------- */
+function aplicarTema() {
+  const t = ls.get("mc_tema", "");
+  if (t) document.documentElement.setAttribute("data-theme", t); else document.documentElement.removeAttribute("data-theme");
+  const escuro = t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  $("#btnTema").textContent = escuro ? "☀" : "☾";
+}
+function alternarTema() {
+  const atual = document.documentElement.getAttribute("data-theme") ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  ls.set("mc_tema", atual === "dark" ? "light" : "dark"); aplicarTema();
+}
+
+/* ---------------- Versão e atualização ---------------- */
+async function verificarVersao() {
+  try {
+    const r = await fetch("index.html?nc=" + Date.now(), { cache: "no-store" });
+    const txt = await r.text();
+    const m = txt.match(/const APP_VERSION\s*=\s*"([^"]+)"/);
+    if (m && m[1] !== APP_VERSION) { $("#updVer").textContent = "v" + m[1]; $("#updBar").classList.remove("hidden"); }
+    return m ? m[1] : null;
+  } catch (e) { return null; }
+}
+async function atualizarApp() {
+  toast("Atualizando…");
+  try {
+    if ("serviceWorker" in navigator) for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister();
+    if (window.caches) for (const k of await caches.keys()) await caches.delete(k);
+  } catch (e) {}
+  location.replace(location.pathname + "?v=" + Date.now());
+}
+
+/* ---------------- Supabase ---------------- */
+function sbConfig() {
+  const okFixo = !SUPABASE_URL.startsWith("COLE_AQUI") && !SUPABASE_ANON_KEY.startsWith("COLE_AQUI");
+  if (okFixo) return { url: SUPABASE_URL, key: SUPABASE_ANON_KEY };
+  const url = ls.get("mc_sb_url"), key = ls.get("mc_sb_key");
+  return url && key ? { url, key } : null;
+}
+async function iniciar() {
+  aplicarTema();
+  $("#verTag").textContent = "v" + APP_VERSION;
+  document.title = "MENTOR Currículo v" + APP_VERSION;
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  verificarVersao(); setInterval(verificarVersao, 30 * 60 * 1000);
+  const c = sbConfig();
+  if (!c) return telaConfigSupabase();
+  S.sb = supabase.createClient(c.url, c.key, { auth: { persistSession: true, autoRefreshToken: true } });
+  const { data } = await S.sb.auth.getSession();
+  if (data.session) { S.user = data.session.user; await posLogin(); } else telaLogin();
+}
+function telaConfigSupabase() {
+  $("#app").innerHTML = `<div class="login card stack">
+    <div class="logo"><img src="icone.png" alt=""><h2>Conectar ao banco</h2></div>
+    <p class="muted small">Cole os dados do Supabase da igreja (Project Settings → API). Ficam salvos só neste aparelho.</p>
+    <div><label class="f">Project URL</label><input type="text" id="sbu" placeholder="https://xxxx.supabase.co"></div>
+    <div><label class="f">Chave pública (anon)</label><input type="text" id="sbk"></div>
+    <button class="btn pri" onclick="ls.set('mc_sb_url',$('#sbu').value.trim());ls.set('mc_sb_key',$('#sbk').value.trim());location.reload()">Salvar e continuar</button></div>`;
+}
+function telaLogin() {
+  $("#btnAjustes").classList.add("hidden");
+  $("#app").innerHTML = `<div class="login card stack">
+    <div class="logo"><img src="icone.png" alt=""><div class="eyebrow">Escola MENTOR</div><h1>Currículo</h1>
+    <p class="muted small" style="margin:0">Ementas, apostilas, quizzes, podcasts e planos de aula</p></div>
+    <div><label class="f">E-mail</label><input type="email" id="le" autocomplete="username"></div>
+    <div><label class="f">Senha</label><input type="password" id="lp" autocomplete="current-password"></div>
+    <button class="btn pri" id="lb" style="justify-content:center">Entrar</button>
+    <p class="muted small" id="lmsg"></p></div>`;
+  const go = async () => {
+    $("#lb").disabled = true; $("#lmsg").textContent = "Entrando…";
+    const { data, error } = await S.sb.auth.signInWithPassword({ email: $("#le").value.trim(), password: $("#lp").value });
+    $("#lb").disabled = false;
+    if (error) { $("#lmsg").textContent = "Não foi possível entrar: " + traduzErro(error.message); return; }
+    S.user = data.user; posLogin();
+  };
+  $("#lb").onclick = go; $("#lp").onkeydown = e => { if (e.key === "Enter") go(); };
+}
+function traduzErro(m) {
+  if (/Invalid login/i.test(m)) return "e-mail ou senha incorretos.";
+  if (/permission denied/i.test(m)) return "permissão negada no banco (rode o supabase.sql com os GRANTs).";
+  if (/relation .* does not exist|Could not find the table/i.test(m)) return "as tabelas ainda não foram criadas (rode o supabase.sql).";
+  return m;
+}
+async function sair() { await S.sb.auth.signOut(); location.reload(); }
+
+async function posLogin() {
+  $("#btnAjustes").classList.remove("hidden");
+  const { data, error } = await S.sb.from("mc_config").select("*").eq("user_id", S.user.id).maybeSingle();
+  if (error) { $("#app").innerHTML = `<div class="card note warn">Erro ao ler os ajustes: ${esc(traduzErro(error.message))}</div>`; return; }
+  if (!data) {
+    const novo = { user_id: S.user.id, bibliografia_padrao: "", perfil: PERFIL_PADRAO, modelo: MODELOS[0].id };
+    await S.sb.from("mc_config").insert(novo); S.cfg = novo;
+  } else S.cfg = data;
+  if (!S.cfg.perfil) S.cfg.perfil = PERFIL_PADRAO;
+  if (!S.cfg.modelo) S.cfg.modelo = MODELOS[0].id;
+  irInicio();
+}
+
+/* ---------------- Início: lista de disciplinas ---------------- */
+async function irInicio() {
+  if (!S.user) return;
+  if (S.busy) return toast("Aguarde a geração terminar (ou toque em Parar).");
+  S.d = null; S.docs = {};
+  $("#app").innerHTML = `<div class="empty"><span class="spin"></span> Carregando…</div>`;
+  const [r1, r2] = await Promise.all([
+    S.sb.from("mc_disciplinas").select("id,nome,carga_horaria,ementa_aprovada,updated_at").order("updated_at", { ascending: false }),
+    S.sb.from("mc_docs").select("disciplina_id,tipo,unidade,status")
+  ]);
+  if (r1.error) { $("#app").innerHTML = `<div class="card note warn">${esc(traduzErro(r1.error.message))}</div>`; return; }
+  S.discs = r1.data || [];
+  S.resumoDocs = {};
+  (r2.data || []).forEach(x => { (S.resumoDocs[x.disciplina_id] ||= []).push(x); });
+  const semChave = !ls.get("mc_anthropic_key") && !ls.get("mc_worker_url");
+  $("#app").innerHTML = `
+    <div class="row" style="justify-content:space-between;align-items:flex-end">
+      <div><div class="eyebrow">Curso Teológico MENTOR</div><h1>Disciplinas</h1></div>
+      <button class="btn pri" onclick="novaDisciplina()">＋ Nova disciplina</button>
+    </div>
+    ${semChave ? `<div class="note warn" style="margin-top:14px">Falta configurar a chave da Anthropic. Toque em <b>⚙ Ajustes</b>.</div>` : ""}
+    ${S.discs.length ? `<div class="disc-grid">${S.discs.map(cardDisc).join("")}</div>` :
+      `<div class="empty" style="margin-top:16px">Nenhuma disciplina ainda. Comece por <b>Nova disciplina</b>.</div>`}`;
+}
+function cardDisc(d) {
+  const docs = S.resumoDocs[d.id] || [];
+  const u = n => docs.find(x => x.tipo === "unidade" && x.unidade === n);
+  const temTipo = t => docs.some(x => x.tipo === t);
+  const dot = (txt, st) => `<span class="dot ${st}" title="${txt}">${txt}</span>`;
+  return `<div class="card disc" onclick="abrirDisciplina('${d.id}')">
+    <div class="eyebrow">${d.carga_horaria ? esc(d.carga_horaria) : "Disciplina"}</div>
+    <h3>${esc(d.nome)}</h3>
+    <div class="row">${d.ementa_aprovada ? `<span class="tag ok">Ementa aprovada</span>` : `<span class="tag">Ementa em preparo</span>`}</div>
+    <div class="dots">
+      ${[1, 2, 3, 4].map(n => { const x = u(n); return dot("U" + n, x ? (x.status === "revisada" ? "ok" : "on") : ""); }).join("")}
+      ${dot("Q", temTipo("quiz") ? "on" : "")}${dot("P", temTipo("podcast") ? "on" : "")}${dot("A", temTipo("planos") ? "on" : "")}${dot("T", temTipo("trabalhos") ? "on" : "")}
+    </div>
+    <div class="muted small" style="margin-top:8px">Atualizada em ${dataBR(d.updated_at)}</div></div>`;
+}
+function novaDisciplina() {
+  modal(`<h3>Nova disciplina</h3><div class="stack">
+    <div><label class="f">Nome da disciplina</label><input type="text" id="nn" placeholder="Ex.: Base Teológica"></div>
+    <div><label class="f">Carga horária <span class="muted">(opcional)</span></label><input type="text" id="nc" placeholder="Ex.: 40 horas"></div>
+    <div class="row" style="justify-content:flex-end"><button class="btn" data-x>Cancelar</button><button class="btn pri" data-ok>Criar</button></div></div>`,
+    (m, close) => {
+      $("[data-x]", m).onclick = close;
+      $("#nn", m).focus();
+      $("[data-ok]", m).onclick = async () => {
+        const nome = $("#nn", m).value.trim(); if (!nome) return;
+        const { data, error } = await S.sb.from("mc_disciplinas").insert({ nome, carga_horaria: $("#nc", m).value.trim(), user_id: S.user.id }).select().single();
+        if (error) return toast("Erro: " + traduzErro(error.message));
+        close(); abrirDisciplina(data.id);
+      };
+    });
+}
+
+/* ---------------- Disciplina ---------------- */
+async function abrirDisciplina(id, aba) {
+  $("#app").innerHTML = `<div class="empty"><span class="spin"></span> Abrindo…</div>`;
+  const [r1, r2] = await Promise.all([
+    S.sb.from("mc_disciplinas").select("*").eq("id", id).single(),
+    S.sb.from("mc_docs").select("*").eq("disciplina_id", id)
+  ]);
+  if (r1.error) return toast("Erro: " + traduzErro(r1.error.message));
+  S.d = r1.data; S.docs = {};
+  (r2.data || []).forEach(x => S.docs[x.tipo + ":" + x.unidade] = x);
+  S.editando = null;
+  S.aba = aba || (S.d.ementa ? (S.d.ementa_aprovada ? "apostila" : "ementa") : "biblio");
+  render();
+}
+const doc = (tipo, u = 0) => S.docs[tipo + ":" + u];
+const EM = () => S.d && S.d.ementa;
+
+function render() {
+  if (!S.d) return irInicio();
+  const d = S.d;
+  const nUni = [1, 2, 3, 4].filter(n => doc("unidade", n)?.conteudo).length;
+  const passos = [
+    ["biblio", "Bibliografia", !!(d.obras || d.material || d.ementa_oficial)],
+    ["ementa", "Ementa", d.ementa_aprovada],
+    ["apostila", "Apostila", nUni === 4],
+    ["materiais", "Quizzes, podcasts e aulas", false],
+    ["exportar", "Exportar Word", false]
+  ];
+  $("#app").innerHTML = `
+    <div class="disc-head">
+      <div><a href="#" class="small" onclick="irInicio();return false">← Disciplinas</a>
+        <h1 style="margin-top:4px">${esc(d.nome)}</h1>
+        <div class="muted small">${d.carga_horaria ? esc(d.carga_horaria) + " · " : ""}${nUni}/4 unidades escritas</div></div>
+      <div class="row"><button class="btn sm ghost" onclick="renomearDisciplina()">Renomear</button>
+      <button class="btn sm danger" onclick="apagarDisciplina()">Apagar</button></div>
+    </div>
+    <nav class="steps">${passos.map((p, i) => `<div class="step ${S.aba === p[0] ? "on" : ""} ${p[2] ? "done" : ""}" onclick="irAba('${p[0]}')"><span class="n">${p[2] ? "✓" : i + 1}</span>${p[1]}</div>`).join("")}</nav>
+    <section id="aba"></section>`;
+  ({ biblio: abaBiblio, ementa: abaEmenta, apostila: abaApostila, materiais: abaMateriais, exportar: abaExportar })[S.aba]();
+}
+function irAba(a) {
+  if (S.busy) return toast("Aguarde a geração terminar (ou toque em Parar).");
+  if (S.editando && !confirm("Sair sem salvar a edição?")) return;
+  S.editando = null; S.aba = a; render();
+}
+async function salvarDisc(campos, silencioso) {
+  campos.updated_at = new Date().toISOString();
+  const { error } = await S.sb.from("mc_disciplinas").update(campos).eq("id", S.d.id);
+  if (error) { toast("Erro ao salvar: " + traduzErro(error.message)); return false; }
+  Object.assign(S.d, campos); if (!silencioso) toast("Salvo ✓"); return true;
+}
+async function salvarDoc(tipo, u, conteudo, status) {
+  const reg = {
+    disciplina_id: S.d.id, user_id: S.user.id, tipo, unidade: u, conteudo,
+    palavras: palavras(conteudo), status: status || doc(tipo, u)?.status || "rascunho", updated_at: new Date().toISOString()
+  };
+  const { data, error } = await S.sb.from("mc_docs").upsert(reg, { onConflict: "disciplina_id,tipo,unidade" }).select().single();
+  if (error) { toast("Erro ao salvar: " + traduzErro(error.message)); return false; }
+  S.docs[tipo + ":" + u] = data;
+  S.sb.from("mc_disciplinas").update({ updated_at: reg.updated_at }).eq("id", S.d.id);
+  return true;
+}
+function renomearDisciplina() {
+  modal(`<h3>Renomear</h3><div class="stack"><input type="text" id="rn" value="${esc(S.d.nome)}">
+  <input type="text" id="rc" value="${esc(S.d.carga_horaria || "")}" placeholder="Carga horária">
+  <div class="row" style="justify-content:flex-end"><button class="btn" data-x>Cancelar</button><button class="btn pri" data-ok>Salvar</button></div></div>`,
+    (m, close) => {
+      $("[data-x]", m).onclick = close;
+      $("[data-ok]", m).onclick = async () => { await salvarDisc({ nome: $("#rn", m).value.trim() || S.d.nome, carga_horaria: $("#rc", m).value.trim() }); close(); render(); };
+    });
+}
+async function apagarDisciplina() {
+  if (!await confirmar("Apagar disciplina", `Isto apaga <b>${esc(S.d.nome)}</b> com ementa, apostila, quizzes e podcasts. Não dá para desfazer.`, "Apagar tudo", true)) return;
+  const { error } = await S.sb.from("mc_disciplinas").delete().eq("id", S.d.id);
+  if (error) return toast("Erro: " + traduzErro(error.message));
+  toast("Disciplina apagada"); irInicio();
+}
+
+/* ---------------- 1. Bibliografia ---------------- */
+function abaBiblio() {
+  const d = S.d, padrao = (S.cfg.bibliografia_padrao || "").trim();
+  $("#aba").innerHTML = `<div class="grid2">
+    <div class="card stack">
+      <h3>Obras desta disciplina</h3>
+      <p class="muted small" style="margin:0">Uma obra por linha (autor, título, editora). A IA usa estas obras como base principal e não inventa outras citações.</p>
+      <textarea id="bObras" style="min-height:180px" placeholder="GRUDEM, Wayne. Teologia Sistemática. Vida Nova.&#10;HORTON, Stanley (ed.). Teologia Sistemática: uma perspectiva pentecostal. CPAD.">${esc(d.obras || "")}</textarea>
+      <label class="row small" style="gap:8px"><input type="checkbox" id="bPadrao" ${d.usar_padrao !== false ? "checked" : ""}> Somar a bibliografia padrão da Escola MENTOR
+        ${padrao ? `<span class="tag ok">${padrao.split("\n").filter(Boolean).length} obras</span>` : `<span class="tag warn">vazia: preencha em ⚙ Ajustes</span>`}</label>
+      <div><label class="f">Orientações do professor <span class="muted">(ênfases, público, cuidados)</span></label>
+      <textarea id="bOri" placeholder="Ex.: turma de líderes de célula; dar ênfase à aplicação pastoral; tratar a doutrina do Espírito Santo na linha pentecostal clássica.">${esc(d.orientacoes || "")}</textarea></div>
+    </div>
+    <div class="card stack">
+      <h3>Ementa oficial <span class="muted small">(se houver)</span></h3>
+      <p class="muted small" style="margin:0">Se a disciplina já tem ementa no Ementário da Escola MENTOR, cole aqui. A IA vai organizá-la sem mudar o escopo.</p>
+      <textarea id="bOficial" style="min-height:120px">${esc(d.ementa_oficial || "")}</textarea>
+      <h3 style="margin-top:8px">Material de apoio</h3>
+      <p class="muted small" style="margin:0">Trechos, resumos, anotações de aula ou o texto de PDFs. A IA usa como fonte prioritária de conteúdo.</p>
+      <textarea id="bMat" style="min-height:160px">${esc(d.material || "")}</textarea>
+      <div class="row"><label class="btn sm">📄 Importar PDF ou TXT<input type="file" id="bArq" accept=".pdf,.txt,.md" multiple hidden></label>
+        <span class="muted small" id="bConta"></span></div>
+    </div></div>
+    <div class="row" style="margin-top:16px;justify-content:flex-end">
+      <button class="btn pri" onclick="salvarBiblio(true)">Salvar e ir para a Ementa →</button></div>`;
+  const conta = () => {
+    const n = palavras($("#bMat").value);
+    $("#bConta").innerHTML = n ? `${fmtN(n)} palavras no material` + (n > 60000 ? ` · <span style="color:var(--warn)">muito longo: cada geração fica mais cara</span>` : "") : "";
+  };
+  $("#bMat").oninput = conta; conta();
+  $("#bArq").onchange = e => importarArquivos(e.target.files, conta);
+}
+async function salvarBiblio(avancar) {
+  const ok = await salvarDisc({
+    obras: $("#bObras").value.trim(), usar_padrao: $("#bPadrao").checked, orientacoes: $("#bOri").value.trim(),
+    ementa_oficial: $("#bOficial").value.trim(), material: $("#bMat").value.trim()
+  });
+  if (ok && avancar) { S.aba = "ementa"; render(); }
+}
+let pdfjsPronto = null;
+function carregarScript(src) {
+  return new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = () => rej(new Error("Falha ao carregar " + src)); document.head.appendChild(s); });
+}
+async function importarArquivos(files, depois) {
+  for (const f of files) {
+    toast("Lendo " + f.name + "…");
+    let texto = "";
+    try {
+      if (/\.pdf$/i.test(f.name)) {
+        if (!pdfjsPronto) pdfjsPronto = carregarScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js").then(() => {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        });
+        await pdfjsPronto;
+        const pdf = await pdfjsLib.getDocument({ data: await f.arrayBuffer() }).promise;
+        const partes = [];
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const pg = await pdf.getPage(i); const tc = await pg.getTextContent();
+          partes.push(tc.items.map(it => it.str + (it.hasEOL ? "\n" : " ")).join(""));
+        }
+        texto = partes.join("\n\n").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+        if (!texto) { toast(f.name + ": o PDF parece ser só imagem (escaneado). Não há texto para extrair.", 6000); continue; }
+      } else texto = (await f.text()).trim();
+    } catch (e) { toast("Erro ao ler " + f.name + ": " + e.message, 6000); continue; }
+    const ta = $("#bMat");
+    ta.value = (ta.value.trim() ? ta.value.trim() + "\n\n" : "") + `=== Material: ${f.name} ===\n` + texto;
+    toast(`${f.name}: ${fmtN(palavras(texto))} palavras importadas`);
+  }
+  depois && depois();
+}
+function contextoBiblio() {
+  const d = S.d, partes = [];
+  const padrao = (S.cfg.bibliografia_padrao || "").trim();
+  if (d.obras) partes.push(`OBRAS INDICADAS PELO PROFESSOR PARA ESTA DISCIPLINA (base principal):\n${d.obras}`);
+  if (d.usar_padrao !== false && padrao) partes.push(`BIBLIOGRAFIA PADRÃO DA ESCOLA MENTOR:\n${padrao}`);
+  if (d.orientacoes) partes.push(`ORIENTAÇÕES DO PROFESSOR:\n${d.orientacoes}`);
+  if (d.material) partes.push(`MATERIAL DE APOIO FORNECIDO PELO PROFESSOR (fonte prioritária de conteúdo; use as ideias, não copie longos trechos):\n<material>\n${d.material}\n</material>`);
+  if (!partes.length) partes.push("Nenhuma bibliografia foi informada. Use obras reais e reconhecidas de autores evangélicos conservadores, em português.");
+  return partes.join("\n\n") + "\n\n" + REGRA_FONTES;
+}
+
+/* ---------------- 2. Ementa ---------------- */
+function ementaVazia() {
+  return {
+    nome: S.d.nome, carga_horaria: S.d.carga_horaria || "", descricao: "", objetivo_geral: "", objetivos_especificos: [],
+    unidades: [1, 2, 3, 4].map(() => ({ titulo: "", objetivo: "", secoes: [1, 2, 3, 4].map(() => ({ titulo: "", escopo: "" })) })),
+    bibliografia_basica: [], bibliografia_complementar: []
+  };
+}
+function abaEmenta() {
+  const e = EM();
+  if (!e) {
+    $("#aba").innerHTML = `<div class="card stack" style="max-width:760px">
+      <h2>Gerar a ementa</h2>
+      <p>A ementa é a <b>fonte de verdade</b> da disciplina: 4 unidades, cada uma com 4 seções e o escopo de cada seção (o que entra e o que fica para outra seção). A apostila, os quizzes e os podcasts saem dela.</p>
+      <div class="note">${S.d.ementa_oficial ? "Vou partir da <b>ementa oficial</b> que você colou." : "Não há ementa oficial colada; a IA vai propor uma."}
+        ${S.d.obras ? " Vou usar as obras que você indicou." : " Você ainda não indicou obras (passo 1)."}</div>
+      <div><label class="f">Pedido extra para esta ementa <span class="muted">(opcional)</span></label>
+      <textarea id="eExtra" placeholder="Ex.: a Unidade 4 deve tratar da aplicação no discipulado em células."></textarea></div>
+      <div class="row"><button class="btn pri" id="eGerar" onclick="gerarEmenta()">✦ Gerar ementa com IA</button>
+      <button class="btn" onclick="S.d.ementa=ementaVazia();render()">Preencher à mão</button></div>
+      <div id="eLive"></div></div>`;
+    return;
+  }
+  const lista = a => (a || []).join("\n");
+  $("#aba").innerHTML = `
+    <div class="toolbar row" style="justify-content:space-between">
+      <div class="row">${S.d.ementa_aprovada ? `<span class="tag ok">✓ Aprovada</span>` : `<span class="tag warn">Revise e aprove para liberar a apostila</span>`}
+        ${S.d.ementa_alterada_em ? `<span class="muted small">Alterada em ${dataBR(S.d.ementa_alterada_em)}</span>` : ""}</div>
+      <div class="row">
+        <button class="btn sm" onclick="refazerEmenta()">↻ Gerar de novo</button>
+        <button class="btn sm" onclick="exportar('ementa')">⬇ Word</button>
+        <button class="btn sm" onclick="salvarEmenta(false)">Salvar</button>
+        <button class="btn sm pri" onclick="salvarEmenta(true)">${S.d.ementa_aprovada ? "Salvar e ir para a Apostila →" : "✓ Aprovar ementa"}</button>
+      </div></div>
+    <div class="stack">
+      <div class="card stack">
+        <div class="grid2"><div><label class="f">Disciplina</label><input type="text" id="e_nome" value="${esc(e.nome || S.d.nome)}"></div>
+        <div><label class="f">Carga horária</label><input type="text" id="e_carga" value="${esc(e.carga_horaria || S.d.carga_horaria || "")}"></div></div>
+        <div><label class="f">Ementa (descrição)</label><textarea id="e_desc">${esc(e.descricao || "")}</textarea></div>
+        <div><label class="f">Objetivo geral</label><textarea id="e_og" style="min-height:70px">${esc(e.objetivo_geral || "")}</textarea></div>
+        <div><label class="f">Objetivos específicos <span class="muted">(um por linha)</span></label><textarea id="e_oe">${esc(lista(e.objetivos_especificos))}</textarea></div>
+      </div>
+      <div class="grid2">${e.unidades.map((u, i) => `
+        <div class="unit-card">
+          <h4>Unidade ${i + 1}</h4>
+          <input type="text" id="u${i}_t" value="${esc(u.titulo)}" placeholder="Título da unidade" style="font-weight:700">
+          <textarea id="u${i}_o" style="min-height:56px;margin-top:8px;font-size:14px" placeholder="Objetivo da unidade">${esc(u.objetivo || "")}</textarea>
+          ${u.secoes.map((s, j) => `<div class="sec-row"><span class="num">${i + 1}.${j + 1}</span><div>
+            <input type="text" id="u${i}s${j}_t" value="${esc(s.titulo)}" placeholder="Título da seção">
+            <textarea id="u${i}s${j}_e" placeholder="Escopo: o que entra (e o que não entra)" style="margin-top:6px">${esc(s.escopo)}</textarea></div></div>`).join("")}
+        </div>`).join("")}</div>
+      <div class="card grid2">
+        <div><label class="f">Bibliografia básica <span class="muted">(uma por linha)</span></label><textarea id="e_bb" style="min-height:140px">${esc(lista(e.bibliografia_basica))}</textarea></div>
+        <div><label class="f">Bibliografia complementar <span class="muted">(uma por linha)</span></label><textarea id="e_bc" style="min-height:140px">${esc(lista(e.bibliografia_complementar))}</textarea></div>
+      </div>
+    </div>`;
+}
+function lerEmentaDoForm() {
+  const linhas = id => $(id).value.split("\n").map(s => s.replace(/^\s*[-•*\d.)]+\s*/, "").trim()).filter(Boolean);
+  return {
+    nome: $("#e_nome").value.trim(), carga_horaria: $("#e_carga").value.trim(),
+    descricao: $("#e_desc").value.trim(), objetivo_geral: $("#e_og").value.trim(), objetivos_especificos: linhas("#e_oe"),
+    unidades: [0, 1, 2, 3].map(i => ({
+      titulo: $(`#u${i}_t`).value.trim(), objetivo: $(`#u${i}_o`).value.trim(),
+      secoes: [0, 1, 2, 3].map(j => ({ titulo: $(`#u${i}s${j}_t`).value.trim(), escopo: $(`#u${i}s${j}_e`).value.trim() }))
+    })),
+    bibliografia_basica: linhas("#e_bb"), bibliografia_complementar: linhas("#e_bc")
+  };
+}
+async function salvarEmenta(aprovar) {
+  const nova = lerEmentaDoForm();
+  const faltam = [];
+  nova.unidades.forEach((u, i) => { if (!u.titulo) faltam.push(`título da Unidade ${i + 1}`); u.secoes.forEach((s, j) => { if (!s.titulo) faltam.push(`seção ${i + 1}.${j + 1}`); }); });
+  if (aprovar && faltam.length) return toast("Falta preencher: " + faltam.slice(0, 4).join(", ") + (faltam.length > 4 ? "…" : ""), 5000);
+  const mudou = JSON.stringify(nova) !== JSON.stringify(S.d.ementa);
+  const campos = { ementa: nova };
+  if (mudou) campos.ementa_alterada_em = new Date().toISOString();
+  if (nova.nome && nova.nome !== S.d.nome) campos.nome = nova.nome;
+  if (nova.carga_horaria !== S.d.carga_horaria) campos.carga_horaria = nova.carga_horaria;
+  if (aprovar) campos.ementa_aprovada = true;
+  if (!await salvarDisc(campos, true)) return;
+  if (aprovar && S.d.ementa_aprovada && !mudou) { S.aba = "apostila"; render(); return; }
+  toast(aprovar ? "Ementa aprovada ✓" : "Ementa salva ✓");
+  if (aprovar) { S.aba = "apostila"; }
+  render();
+}
+async function refazerEmenta() {
+  const temUni = [1, 2, 3, 4].some(n => doc("unidade", n)?.conteudo);
+  if (!await confirmar("Gerar a ementa de novo", "A ementa atual será substituída pela nova proposta da IA." + (temUni ? " <b>As unidades já escritas continuam salvas</b>, mas ficarão marcadas como feitas com a ementa antiga." : ""), "Gerar de novo")) return;
+  S.d.ementa = null; render();
+}
+function ementaParaTexto(e) {
+  if (!e) return "";
+  let t = `# Ementa — ${e.nome || S.d.nome}\n\n`;
+  if (e.carga_horaria) t += `**Carga horária:** ${e.carga_horaria}\n\n`;
+  if (e.descricao) t += `## Ementa\n\n${e.descricao}\n\n`;
+  if (e.objetivo_geral) t += `## Objetivo geral\n\n${e.objetivo_geral}\n\n`;
+  if (e.objetivos_especificos?.length) t += `## Objetivos específicos\n\n${e.objetivos_especificos.map(x => "- " + x).join("\n")}\n\n`;
+  t += `## Conteúdo programático\n\n`;
+  e.unidades.forEach((u, i) => {
+    t += `### Unidade ${i + 1} — ${u.titulo}\n\n`;
+    if (u.objetivo) t += `*${u.objetivo}*\n\n`;
+    u.secoes.forEach((s, j) => { t += `- **${i + 1}.${j + 1} ${s.titulo}.** ${s.escopo}\n`; });
+    t += "\n";
+  });
+  if (e.bibliografia_basica?.length) t += `## Bibliografia básica\n\n${e.bibliografia_basica.map(x => "- " + x).join("\n")}\n\n`;
+  if (e.bibliografia_complementar?.length) t += `## Bibliografia complementar\n\n${e.bibliografia_complementar.map(x => "- " + x).join("\n")}\n`;
+  return t.trim();
+}
+async function gerarEmenta() {
+  const d = S.d, extra = $("#eExtra")?.value.trim();
+  const prompt = `Elabore a ementa da disciplina "${d.nome}" do Curso Teológico da Escola MENTOR.
+${d.carga_horaria ? "Carga horária: " + d.carga_horaria + "\n" : ""}
+${d.ementa_oficial ? `EMENTA OFICIAL DO EMENTÁRIO DA ESCOLA MENTOR (siga-a fielmente; organize-a na estrutura pedida sem mudar o escopo):\n${d.ementa_oficial}\n` : ""}
+${contextoBiblio()}
+${extra ? "\nPEDIDO DO PROFESSOR PARA ESTA EMENTA:\n" + extra + "\n" : ""}
+REGRAS DE ESTRUTURA
+- Exatamente 4 unidades, em progressão didática (dos fundamentos à aplicação ministerial).
+- Cada unidade com exatamente 4 seções.
+- As 16 seções devem ter temas mutuamente exclusivos: nenhum assunto pode ocupar duas seções, nem dentro da mesma unidade nem em unidades diferentes.
+- O "escopo" de cada seção diz em 2 a 3 frases o que ela desenvolve e o que NÃO entra nela por pertencer a outra seção (cite qual).
+- Objetivos específicos: 5 a 8, com verbos de ação.
+- Bibliografia básica: 3 a 5 obras; complementar: 4 a 6. Priorize as obras indicadas pelo professor. Formato: SOBRENOME, Nome. Título. Editora.
+
+Responda SOMENTE com um JSON válido, sem texto antes ou depois, neste formato:
+{"nome":"","carga_horaria":"","descricao":"parágrafo da ementa","objetivo_geral":"","objetivos_especificos":[""],"unidades":[{"titulo":"","objetivo":"","secoes":[{"titulo":"","escopo":""},{"titulo":"","escopo":""},{"titulo":"","escopo":""},{"titulo":"","escopo":""}]}],"bibliografia_basica":[""],"bibliografia_complementar":[""]}`;
+  const live = $("#eLive"); $("#eGerar").disabled = true;
+  live.innerHTML = `<div class="note" style="margin-top:8px"><span class="spin"></span> Gerando ementa… <span id="eCnt"></span> <button class="btn sm" onclick="pararGeracao()">Parar</button></div>`;
+  try {
+    const r = await gerarTexto({ prompt, max_tokens: 8000, onText: t => { const c = $("#eCnt"); if (c) c.textContent = fmtN(palavras(t)) + " palavras"; } });
+    const e = extrairJSON(r.text);
+    if (!e || !Array.isArray(e.unidades) || e.unidades.length !== 4) throw new Error("A resposta não veio no formato esperado. Tente de novo.");
+    e.unidades.forEach(u => { u.secoes = (u.secoes || []).slice(0, 4); while (u.secoes.length < 4) u.secoes.push({ titulo: "", escopo: "" }); });
+    e.nome = e.nome || d.nome;
+    await salvarDisc({ ementa: e, ementa_aprovada: false, ementa_alterada_em: new Date().toISOString() }, true);
+    toast("Ementa gerada. Revise, ajuste o que quiser e aprove.", 5000);
+    render();
+  } catch (err) {
+    live.innerHTML = `<div class="note warn" style="margin-top:8px">${esc(err.message)}</div>`;
+    const b = $("#eGerar"); if (b) b.disabled = false;
+  }
+}
+function extrairJSON(t) {
+  t = String(t || "").replace(/```json|```/g, "");
+  const a = t.indexOf("{"), b = t.lastIndexOf("}");
+  if (a < 0 || b < a) return null;
+  try { return JSON.parse(t.slice(a, b + 1)); } catch (e) { return null; }
+}
+
+/* ---------------- Chamada à IA (Anthropic, com streaming) ---------------- */
+function pararGeracao() { if (S.abort) S.abort.abort(); }
+async function chamarClaude({ system, messages, max_tokens, onText, signal }) {
+  const worker = ls.get("mc_worker_url"), chave = ls.get("mc_anthropic_key");
+  if (!worker && !chave) throw new Error("Configure a chave da Anthropic em ⚙ Ajustes.");
+  const url = worker || "https://api.anthropic.com/v1/messages";
+  const headers = { "content-type": "application/json" };
+  if (worker) { headers["x-mentor-token"] = ls.get("mc_worker_token", ""); }
+  else { headers["x-api-key"] = chave; headers["anthropic-version"] = "2023-06-01"; headers["anthropic-dangerous-direct-browser-access"] = "true"; }
+  const body = { model: S.cfg.modelo || MODELOS[0].id, max_tokens, system, messages, stream: true };
+  let resp;
+  try { resp = await fetch(url, { method: "POST", headers, body: JSON.stringify(body), signal }); }
+  catch (e) { if (e.name === "AbortError") throw e; throw new Error("Sem conexão com a Anthropic. Verifique a internet."); }
+  if (!resp.ok) {
+    let det = ""; try { det = (await resp.json()).error?.message || ""; } catch (e) {}
+    if (resp.status === 401) throw new Error("A chave da Anthropic não foi aceita. Confira em ⚙ Ajustes.");
+    if (resp.status === 400 && /credit/i.test(det)) throw new Error("Sua conta da Anthropic está sem créditos (console.anthropic.com → Billing).");
+    if (resp.status === 404 && /model/i.test(det)) throw new Error("Modelo não encontrado: " + body.model + ". Escolha outro em ⚙ Ajustes.");
+    if (resp.status === 429) throw new Error("Limite de uso atingido na Anthropic. Aguarde um minuto e tente de novo.");
+    if (resp.status === 529 || resp.status >= 500) throw new Error("A Anthropic está sobrecarregada agora. Tente de novo em instantes.");
+    throw new Error(`Erro ${resp.status}: ${det}`);
+  }
+  const reader = resp.body.getReader(), dec = new TextDecoder();
+  let buf = "", text = "", stop = null, usage = {};
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    let i;
+    while ((i = buf.indexOf("\n")) >= 0) {
+      const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1);
+      if (!line.startsWith("data:")) continue;
+      let ev; try { ev = JSON.parse(line.slice(5)); } catch (e) { continue; }
+      if (ev.type === "content_block_delta" && ev.delta?.type === "text_delta") { text += ev.delta.text; onText && onText(text); }
+      else if (ev.type === "message_delta") { stop = ev.delta?.stop_reason || stop; Object.assign(usage, ev.usage || {}); }
+      else if (ev.type === "message_start") Object.assign(usage, ev.message?.usage || {});
+      else if (ev.type === "error") throw new Error("Erro da Anthropic: " + (ev.error?.message || "desconhecido"));
+    }
+  }
+  return { text, stop, usage };
+}
+/** Gera texto longo; se bater no limite, continua sozinho de onde parou. */
+async function gerarTexto({ prompt, max_tokens, onText, inicio = "", continuacoes = 2 }) {
+  S.busy = true; S.abort = new AbortController(); S.live = inicio;
+  const system = (S.cfg.perfil || PERFIL_PADRAO);
+  let total = inicio;
+  // Junta o texto já escrito com a continuação sem quebrar palavra, frase nem título
+  const costurar = (base, espacoFinal, cont) => {
+    if (!base) return cont;
+    if (/^\s/.test(cont)) return base + cont;
+    if (espacoFinal) return base + espacoFinal + cont;
+    const ultima = base.split("\n").pop();
+    if (/^#{1,4}\s|^\s*[-*]\s|^\s*\d+[.)]\s|^\s*\|/.test(ultima) || /^#{1,4}\s|^\s*[-*]\s|^\|/.test(cont)) return base + "\n\n" + cont;
+    return /[.!?:;"”)»]$/.test(base) ? base + " " + cont : base + cont;
+  };
+  try {
+    for (let rodada = 0; rodada <= continuacoes; rodada++) {
+      const messages = [{ role: "user", content: prompt }];
+      if (total.trim()) {
+        messages.push({ role: "assistant", content: total.trimEnd() });
+        messages.push({ role: "user", content: "O texto acima foi interrompido. Continue exatamente do ponto em que parou, sem repetir nada do que já foi escrito e sem comentários. Se parou no meio de uma frase, complete-a." });
+      }
+      const base = total.trimEnd(), espacoFinal = total.slice(base.length);
+      const r = await chamarClaude({ system, messages, max_tokens, signal: S.abort.signal, onText: t => { S.live = costurar(base, espacoFinal, t); onText && onText(S.live); } });
+      total = costurar(base, espacoFinal, r.text);
+      if (r.stop !== "max_tokens") return { text: total, completo: true };
+    }
+    return { text: total, completo: false };
+  } catch (e) {
+    if (e.name === "AbortError") { const err = new Error("Geração interrompida."); err.parcial = S.live; err.parado = true; throw err; }
+    e.parcial = S.live; throw e;
+  } finally { S.busy = false; S.abort = null; }
+}
+
+/* ---------------- 3. Apostila ---------------- */
+function abaApostila() {
+  const e = EM();
+  if (!e || !S.d.ementa_aprovada) {
+    $("#aba").innerHTML = `<div class="empty">Aprove a ementa primeiro. A apostila é escrita a partir dela.<br><br><button class="btn pri" onclick="irAba('ementa')">Ir para a Ementa</button></div>`;
+    return;
+  }
+  $("#aba").innerHTML = `<div class="pills" style="margin-bottom:14px">${[1, 2, 3, 4].map(n => {
+    const x = doc("unidade", n);
+    const st = !x?.conteudo ? "" : x.status === "revisada" ? `<span class="tag ok">✓</span>` : x.status === "parcial" ? `<span class="tag warn">parcial</span>` : `<span class="tag gold">${fmtN(x.palavras)}</span>`;
+    return `<button class="pill ${S.uni === n ? "on" : ""}" onclick="trocarUni(${n})">Unidade ${n} ${st}</button>`;
+  }).join("")}</div><div id="painel"></div>`;
+  painelDoc("unidade", S.uni);
+}
+function trocarUni(n) {
+  if (S.busy) return toast("Aguarde a geração terminar (ou toque em Parar).");
+  if (S.editando && !confirm("Sair sem salvar a edição?")) return;
+  S.editando = null; S.uni = n; render();
+}
+
+/* Painel genérico para qualquer documento gerado */
+const TIPOS = {
+  unidade: { nome: "Unidade", alvo: 8500, tokens: 32000 },
+  quiz: { nome: "Quiz", alvo: 2500, tokens: 12000 },
+  podcast: { nome: "Podcast", alvo: 4200, tokens: 24000 },
+  planos: { nome: "Planos de aula", alvo: 4500, tokens: 20000 },
+  trabalhos: { nome: "Trabalhos finais", alvo: 3500, tokens: 14000 }
+};
+function tituloDoc(tipo, u) {
+  const e = EM(), tu = u && e ? e.unidades[u - 1]?.titulo : "";
+  if (tipo === "unidade") return `Unidade ${u}${tu ? " — " + tu : ""}`;
+  if (tipo === "quiz") return `Quiz da Unidade ${u}${tu ? " — " + tu : ""}`;
+  if (tipo === "podcast") return `Podcast da Unidade ${u}${tu ? " — " + tu : ""}`;
+  if (tipo === "planos") return "Planos de aula";
+  return "Sugestões de trabalho final";
+}
+function avisosDoc(tipo, u, x) {
+  if (!x?.conteudo) return "";
+  const av = [];
+  if (tipo === "unidade" && S.d.ementa_alterada_em && new Date(S.d.ementa_alterada_em) > new Date(x.updated_at))
+    av.push("A ementa foi alterada depois que esta unidade foi escrita. Confira se ainda bate (ou gere de novo).");
+  if ((tipo === "quiz" || tipo === "podcast") && doc("unidade", u) && new Date(doc("unidade", u).updated_at) > new Date(x.updated_at))
+    av.push(`A Unidade ${u} foi alterada depois que este ${tipo === "quiz" ? "quiz" : "podcast"} foi gerado.`);
+  if (x.status === "parcial") av.push("Este texto ficou incompleto (a geração foi interrompida). Use <b>Continuar geração</b> para terminar de onde parou.");
+  return av.map(a => `<div class="note warn" style="margin-bottom:10px">${a}</div>`).join("");
+}
+function painelDoc(tipo, u, extraHtml = "") {
+  const x = doc(tipo, u), alvo = $("#painel");
+  const titulo = tituloDoc(tipo, u);
+  if (S.editando === tipo + ":" + u) {
+    alvo.innerHTML = `<div class="toolbar row" style="justify-content:space-between"><h3>${esc(titulo)}</h3>
+      <div class="row"><button class="btn sm" onclick="cancelarEdicao()">Cancelar</button><button class="btn sm pri" onclick="salvarEdicao('${tipo}',${u})">Salvar alterações</button></div></div>
+      <p class="muted small">Formato: <b>#</b> título · <b>##</b> seção · <b>###</b> subponto · <b>**negrito**</b> · <b>- </b>lista · <b>&gt;</b> citação bíblica.</p>
+      <textarea id="edTxt" class="editor">${esc(x?.conteudo || "")}</textarea>`;
+    return;
+  }
+  const pode = podeGerar(tipo, u);
+  const btnGerar = `<button class="btn sm pri" id="btnGerar" ${pode.ok ? "" : "disabled"} onclick="gerarDoc('${tipo}',${u})">✦ ${x?.conteudo ? "Gerar de novo" : "Gerar " + (tipo === "unidade" ? "unidade" : TIPOS[tipo].nome.toLowerCase())}</button>`;
+  alvo.innerHTML = `
+    <div class="toolbar row" style="justify-content:space-between">
+      <div><h3>${esc(titulo)}</h3>${x?.conteudo ? `<div class="muted small">${fmtN(x.palavras)} palavras · ${dataBR(x.updated_at)} ${x.status === "revisada" ? `· <span class="tag ok">✓ revisada</span>` : ""}</div>` : ""}</div>
+      <div class="row" id="docBtns">
+        ${x?.conteudo ? `
+          ${x.status === "parcial" ? `<button class="btn sm gold" onclick="gerarDoc('${tipo}',${u},true)">▶ Continuar geração</button>` : ""}
+          <button class="btn sm" onclick="editarDoc('${tipo}',${u})">✎ Editar texto</button>
+          <button class="btn sm" onclick="exportar('${tipo}',${u})">⬇ Word</button>
+          <button class="btn sm" onclick="marcarRevisada('${tipo}',${u})">${x.status === "revisada" ? "Desmarcar revisada" : "✓ Marcar revisada"}</button>
+          <button class="btn sm danger" onclick="apagarDoc('${tipo}',${u})">Apagar</button>` : ""}
+        ${btnGerar}
+      </div>
+    </div>
+    ${pode.ok ? "" : `<div class="note warn" style="margin-bottom:10px">${pode.msg}</div>`}
+    ${extraHtml}
+    <div id="instrBox" class="${x?.conteudo ? "hidden" : ""}" style="margin-bottom:14px">
+      <label class="f">Instruções extras para esta geração <span class="muted">(opcional)</span></label>
+      <textarea id="instr" style="min-height:60px" placeholder="Ex.: dar mais peso ao contexto histórico; incluir um estudo de caso sobre liderança de jovens.">${esc(ls.get("mc_instr_" + S.d.id + tipo + u, ""))}</textarea></div>
+    ${x?.conteudo ? `<a href="#" class="small" onclick="$('#instrBox').classList.toggle('hidden');return false">+ instruções extras para gerar de novo</a>` : ""}
+    ${avisosDoc(tipo, u, x)}
+    <div id="geraBox"></div>
+    <div id="leitura" class="reader">${x?.conteudo ? leituraComBlocos(x.conteudo, tipo, u) : `<div class="empty">${tipo === "unidade" ? `Nada escrito ainda. A unidade será escrita de uma vez (7 a 10 mil palavras), seguindo as 4 seções da ementa. Leva alguns minutos e você acompanha o texto surgindo.` : "Nada gerado ainda."}</div>`}</div>`;
+  $("#instr").oninput = ev => ls.set("mc_instr_" + S.d.id + tipo + u, ev.target.value);
+}
+function podeGerar(tipo, u) {
+  if (!S.d.ementa_aprovada) return { ok: false, msg: "Aprove a ementa primeiro." };
+  if ((tipo === "quiz" || tipo === "podcast") && !doc("unidade", u)?.conteudo)
+    return { ok: false, msg: `Escreva primeiro a Unidade ${u} na aba Apostila. O ${tipo === "quiz" ? "quiz" : "podcast"} é feito a partir do texto dela.` };
+  return { ok: true, msg: "" };
+}
+function leituraComBlocos(md, tipo, u) {
+  const blocos = dividirBlocos(md);
+  return blocos.map((b, i) => {
+    const ajusta = /^## /.test(b) && !S.busy;
+    return `<div class="blk">${ajusta ? `<div class="blk-tools"><button class="btn sm" onclick="ajustarBloco('${tipo}',${u},${i})">✦ Ajustar esta parte</button></div>` : ""}${mdHtml(b)}</div>`;
+  }).join("");
+}
+function dividirBlocos(md) {
+  const linhas = String(md).split("\n"), blocos = []; let cur = [];
+  for (const l of linhas) { if (/^## /.test(l) && cur.length) { blocos.push(cur.join("\n")); cur = []; } cur.push(l); }
+  if (cur.length) blocos.push(cur.join("\n"));
+  return blocos;
+}
+function editarDoc(tipo, u) { S.editando = tipo + ":" + u; reRenderPainel(tipo, u); }
+function cancelarEdicao() { const [t, u] = S.editando.split(":"); S.editando = null; reRenderPainel(t, +u); }
+async function salvarEdicao(tipo, u) {
+  const txt = $("#edTxt").value;
+  if (await salvarDoc(tipo, u, txt)) { S.editando = null; toast("Salvo ✓"); reRenderPainel(tipo, u); }
+}
+async function marcarRevisada(tipo, u) {
+  const x = doc(tipo, u); const novo = x.status === "revisada" ? "rascunho" : "revisada";
+  const { error } = await S.sb.from("mc_docs").update({ status: novo }).eq("id", x.id);
+  if (error) return toast("Erro: " + traduzErro(error.message));
+  x.status = novo; reRenderPainel(tipo, u);
+}
+async function apagarDoc(tipo, u) {
+  if (!await confirmar("Apagar", `Apagar "${esc(tituloDoc(tipo, u))}"?`, "Apagar", true)) return;
+  const x = doc(tipo, u);
+  const { error } = await S.sb.from("mc_docs").delete().eq("id", x.id);
+  if (error) return toast("Erro: " + traduzErro(error.message));
+  delete S.docs[tipo + ":" + u]; reRenderPainel(tipo, u);
+}
+function reRenderPainel() { const y = scrollY; render(); scrollTo(0, y); }
+
+/* Geração de um documento */
+async function gerarDoc(tipo, u, continuar = false) {
+  const x = doc(tipo, u);
+  if (!continuar && x?.conteudo && !await confirmar("Gerar de novo", `O texto atual de "${esc(tituloDoc(tipo, u))}" será substituído.`, "Gerar de novo")) return;
+  const instr = $("#instr")?.value.trim() || "";
+  const prompt = montarPrompt(tipo, u, instr);
+  const cfgT = TIPOS[tipo];
+  const alvoPalavras = tipo === "podcast" ? podcastPalavras() : cfgT.alvo;
+  const box = $("#geraBox"), leit = $("#leitura");
+  $("#docBtns").innerHTML = `<button class="btn sm danger" onclick="pararGeracao()">■ Parar</button>`;
+  box.innerHTML = `<div class="note" style="margin-bottom:10px"><span class="spin"></span> <b id="gSt">Escrevendo…</b> <span id="gCnt"></span>
+    <div class="prog" style="margin-top:8px"><i id="gBar"></i></div>
+    <div class="muted small" style="margin-top:6px">Pode deixar esta tela aberta. O texto vai sendo guardado; se algo falhar, nada se perde.</div></div>`;
+  leit.innerHTML = `<div class="live reader" id="gLive"></div>`;
+  let ultimo = 0, ultimoSalvo = Date.now();
+  const chaveRasc = "mc_rasc_" + S.d.id + tipo + u;
+  const onText = t => {
+    const agora = Date.now();
+    if (agora - ultimo > 700) {
+      ultimo = agora;
+      const n = palavras(t);
+      $("#gCnt").textContent = `${fmtN(n)} de ~${fmtN(alvoPalavras)} palavras`;
+      $("#gBar").style.width = Math.min(98, n / alvoPalavras * 100) + "%";
+      const lv = $("#gLive"); const noFim = lv.scrollTop + lv.clientHeight >= lv.scrollHeight - 60;
+      lv.innerHTML = mdHtml(t); if (noFim) lv.scrollTop = lv.scrollHeight;
+    }
+    if (agora - ultimoSalvo > 5000) { ultimoSalvo = agora; ls.set(chaveRasc, t); }
+  };
+  try {
+    const r = await gerarTexto({ prompt, max_tokens: cfgT.tokens, onText, inicio: continuar ? (x?.conteudo || "") : "" });
+    const limpo = limparSaida(r.text);
+    await salvarDoc(tipo, u, limpo, r.completo ? "rascunho" : "parcial");
+    ls.del(chaveRasc);
+    toast(r.completo ? "Pronto e salvo ✓ Revise o texto." : "Salvo, mas ficou incompleto. Use Continuar geração.", 5000);
+  } catch (err) {
+    const parcial = err.parcial ? limparSaida(err.parcial) : "";
+    if (parcial && palavras(parcial) > 50) {
+      await salvarDoc(tipo, u, parcial, "parcial");
+      toast((err.parado ? "Parado. " : "Falhou: " + err.message + " ") + "O que já foi escrito ficou salvo.", 7000);
+    } else toast(err.message, 7000);
+  }
+  reRenderPainel(tipo, u);
+}
+function limparSaida(t) {
+  return String(t || "").replace(/^```(?:markdown|md)?\s*/i, "").replace(/```\s*$/, "").trim();
+}
+
+/* Ajustar uma parte (seção ##) com a IA */
+function ajustarBloco(tipo, u, i) {
+  const x = doc(tipo, u), blocos = dividirBlocos(x.conteudo), bloco = blocos[i];
+  const titulo = bloco.split("\n")[0].replace(/^##\s*/, "");
+  modal(`<h3>Ajustar: ${esc(titulo)}</h3>
+    <p class="muted small">Só esta parte será reescrita. O resto do texto continua igual.</p>
+    <textarea id="ajI" placeholder="Ex.: está repetindo a seção anterior; aprofunde o contexto histórico; acrescente 2 exemplos pastorais; reduza pela metade."></textarea>
+    <div id="ajL" class="muted small" style="margin-top:8px"></div>
+    <div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-x>Cancelar</button><button class="btn pri" data-ok>✦ Reescrever</button></div>`,
+    (m, close) => {
+      $("[data-x]", m).onclick = () => { if (S.busy) pararGeracao(); close(); };
+      $("[data-ok]", m).onclick = async () => {
+        const instr = $("#ajI", m).value.trim(); if (!instr) return;
+        $("[data-ok]", m).disabled = true;
+        $("#ajL", m).innerHTML = `<span class="spin"></span> Reescrevendo…`;
+        const prompt = `Abaixo está o texto completo de "${tituloDoc(tipo, u)}" da disciplina "${S.d.nome}".
+
+Reescreva SOMENTE a parte que começa com a linha "## ${titulo}", seguindo a instrução do professor. Mantenha a mesma linha de título (##), o mesmo nível dos subtítulos e a numeração. Não repita conteúdo das outras partes. Responda apenas com a parte reescrita, começando pela linha "## ${titulo}", sem comentários.
+
+INSTRUÇÃO DO PROFESSOR:
+${instr}
+
+${contextoBiblio()}
+
+<texto_completo>
+${x.conteudo}
+</texto_completo>`;
+        try {
+          const r = await gerarTexto({ prompt, max_tokens: 12000, continuacoes: 1, onText: t => { $("#ajL", m).innerHTML = `<span class="spin"></span> ${fmtN(palavras(t))} palavras…`; } });
+          let novo = limparSaida(r.text);
+          if (!/^## /.test(novo)) novo = "## " + titulo + "\n\n" + novo;
+          blocos[i] = novo.trimEnd() + "\n";
+          await salvarDoc(tipo, u, blocos.join("\n").replace(/\n{3,}/g, "\n\n"));
+          close(); toast("Parte reescrita e salva ✓"); reRenderPainel(tipo, u);
+        } catch (err) { $("#ajL", m).textContent = err.message; $("[data-ok]", m).disabled = false; }
+      };
+    });
+}
+
+/* ---------------- Prompts ---------------- */
+function titulosDe(md, nivel = 2) {
+  const re = nivel === 2 ? /^##\s+(.+)$/gm : /^#{2,3}\s+(.+)$/gm;
+  return [...String(md || "").matchAll(re)].map(m => m[1].trim());
+}
+const FORMATO_MD = `Use apenas Markdown simples: # título, ## seção, ### subponto, listas com "- " ou "1.", **negrito**, *itálico*, tabelas Markdown e "> " para citações bíblicas. Não use emojis, blocos de código nem linhas de comentário sobre o próprio texto.`;
+
+function montarPrompt(tipo, u, instr) {
+  const e = EM(), em = ementaParaTexto(e);
+  const extra = instr ? `\nINSTRUÇÕES EXTRAS DO PROFESSOR:\n${instr}\n` : "";
+  if (tipo === "unidade") {
+    const un = e.unidades[u - 1];
+    const fronteiras = e.unidades.map((x, i) => i === u - 1 ? null :
+      `- Unidade ${i + 1} (${x.titulo}): ${x.secoes.map(s => s.titulo).join("; ")}`).filter(Boolean).join("\n");
+    const anteriores = [1, 2, 3, 4].filter(n => n !== u && doc("unidade", n)?.conteudo)
+      .map(n => `Unidade ${n}: ${titulosDe(doc("unidade", n).conteudo, 3).slice(0, 40).join(" | ")}`).join("\n");
+    return `Escreva a UNIDADE ${u} completa da apostila da disciplina "${S.d.nome}" do Curso Teológico da Escola MENTOR.
+
+EMENTA APROVADA (fonte de verdade; siga-a):
+${em}
+
+${contextoBiblio()}
+
+SUA TAREFA: Unidade ${u} — ${un.titulo}
+Objetivo da unidade: ${un.objetivo || "(conforme a ementa)"}
+Escreva exatamente estas quatro seções, nesta ordem, com estes títulos, respeitando o escopo de cada uma:
+${un.secoes.map((s, j) => `${u}.${j + 1} ${s.titulo} — Escopo: ${s.escopo}`).join("\n")}
+
+FRONTEIRAS — estes temas pertencem a outras unidades; não os desenvolva aqui (no máximo, remeta em uma frase):
+${fronteiras}
+${anteriores ? `\nJÁ ESCRITO EM OUTRAS UNIDADES (não repita esses conteúdos, exemplos nem aplicações):\n${anteriores}\n` : ""}${extra}
+ESTRUTURA OBRIGATÓRIA
+# Unidade ${u} — ${un.titulo}
+## Objetivos de aprendizagem
+## Introdução
+## ${u}.1 ${un.secoes[0].titulo}
+### ${u}.1.1 … (de 4 a 6 subpontos numerados por seção)
+## ${u}.2 ${un.secoes[1].titulo}
+## ${u}.3 ${un.secoes[2].titulo}
+## ${u}.4 ${un.secoes[3].titulo}
+## Estudo de caso
+## Quadro comparativo
+## Exercícios de fixação
+## Perguntas para reflexão
+## Glossário
+## Resumo da unidade
+## Leituras complementares
+## Bibliografia da unidade
+
+REQUISITOS
+- Extensão total entre 7.000 e 10.000 palavras. Cada uma das seções ${u}.1 a ${u}.4 com 1.500 a 2.200 palavras; cada subponto com 3 a 5 parágrafos desenvolvidos.
+- Em cada seção, integre ao texto: fundamentação bíblica (com referências e, quando útil, o versículo citado com "> "), fundamentação teológica, contexto histórico e cultural quando couber, exemplos e aplicação ministerial.
+- Cada seção traz conteúdo novo. Não reabra o tema de outra seção, não repita exemplos, ilustrações, aplicações nem perguntas, e não termine as quatro seções com o mesmo tipo de fecho.
+- Estudo de caso: uma situação ministerial realista, com 3 perguntas para discussão.
+- Quadro comparativo: uma tabela Markdown útil ao tema (posições, conceitos, períodos ou textos bíblicos).
+- Exercícios de fixação: 8 questões abertas e objetivas, sem gabarito. Perguntas para reflexão: 5. Glossário: 8 a 12 termos.
+- Bibliografia da unidade: somente obras da bibliografia informada ou da ementa.
+- Texto explicativo e desenvolvido, em parágrafos; listas apenas quando ajudarem a clareza.
+- ${FORMATO_MD}
+- Comece direto pela linha "# Unidade ${u} — ${un.titulo}" e termine na bibliografia, sem comentários antes ou depois.`;
+  }
+  const textoUni = doc("unidade", u)?.conteudo || "";
+  if (tipo === "quiz") {
+    const n = +ls.get("mc_quiz_n", "10");
+    return `Com base EXCLUSIVAMENTE no texto da Unidade ${u} abaixo, elabore o quiz da unidade da disciplina "${S.d.nome}".
+
+REGRAS
+- ${n} questões, cada uma com 5 alternativas (A a E) e apenas uma correta.
+- Distribua as questões de forma equilibrada entre as quatro seções da unidade (${u}.1 a ${u}.4).
+- Avalie compreensão, não memorização de detalhes irrelevantes. Inclua questões de aplicação ministerial.
+- Alternativas erradas plausíveis; nada de "todas as anteriores", "nenhuma das anteriores" ou pegadinhas.
+- Varie a letra da alternativa correta ao longo do quiz.
+- Toda resposta correta deve estar sustentada pelo texto da unidade.${extra}
+
+FORMATO
+# Quiz — Unidade ${u}: ${e.unidades[u - 1].titulo}
+### Questão 1
+Enunciado
+
+A) …
+B) …
+C) …
+D) …
+E) …
+
+(repita para todas as questões)
+
+## Gabarito
+1. C — justificativa de uma frase indicando a seção da apostila (ex.: seção ${u}.2).
+
+${FORMATO_MD}
+
+<unidade>
+${textoUni}
+</unidade>`;
+  }
+  if (tipo === "podcast") {
+    const min = +ls.get("mc_pod_min", "30"), pal = podcastPalavras();
+    return `Com base no texto da Unidade ${u} abaixo, escreva o roteiro do podcast da unidade da disciplina "${S.d.nome}".
+
+REGRAS
+- Duração aproximada: ${min} minutos (cerca de ${fmtN(pal)} palavras faladas).
+- Personagens: APRESENTADOR (conduz, pergunta, resume, faz a ponte com o ouvinte) e PROFESSOR (explica com profundidade e linguagem oral).
+- O conteúdo deve ser fiel à apostila: percorra as quatro seções (${u}.1 a ${u}.4) na ordem, um bloco por seção. Não introduza doutrina ou tema que não esteja na unidade; ilustrações orais novas são bem-vindas.
+- Linguagem de conversa, natural para ser lida em voz alta; frases curtas; sem leitura de listas longas.${extra}
+
+FORMATO
+# Podcast — Unidade ${u}: ${e.unidades[u - 1].titulo}
+**Tema:** …
+**Objetivo:** …
+**Duração estimada:** ${min} minutos
+
+## Abertura
+**APRESENTADOR:** …
+**PROFESSOR:** …
+## Bloco 1 — (tema da seção ${u}.1)
+## Bloco 2 — (tema da seção ${u}.2)
+## Bloco 3 — (tema da seção ${u}.3)
+## Bloco 4 — (tema da seção ${u}.4)
+## Aplicações ministeriais
+## Encerramento
+
+${FORMATO_MD}
+
+<unidade>
+${textoUni}
+</unidade>`;
+  }
+  if (tipo === "planos") {
+    const dur = ls.get("mc_aula_dur", "120 minutos");
+    const mapa = [1, 2, 3, 4].map(n => {
+      const t = doc("unidade", n)?.conteudo;
+      return `Unidade ${n} — ${e.unidades[n - 1].titulo}: ` + (t ? titulosDe(t, 3).join(" | ") : e.unidades[n - 1].secoes.map(s => s.titulo).join(" | ") + " (unidade ainda não escrita)");
+    }).join("\n");
+    return `Elabore os planos de aula presenciais da disciplina "${S.d.nome}" do Curso Teológico da Escola MENTOR (modelo híbrido: o aluno estuda a apostila em casa e o encontro presencial aprofunda, discute e aplica).
+
+EMENTA APROVADA:
+${em}
+
+CONTEÚDO DA APOSTILA (seções e subpontos de cada unidade):
+${mapa}
+
+Crie 6 planos: Aula 1 — Introdução à disciplina; Aulas 2 a 5 — uma para cada unidade; Aula 6 — Encerramento e avaliação.
+Duração de cada aula: ${dur}.${extra}
+
+Cada plano deve conter:
+## Aula N — título
+**Objetivo:** …
+**Conteúdo:** (relacione às seções da apostila)
+**Metodologia:** momentos da aula com tempo de cada um (acolhida, exposição dialogada, atividade em grupo, discussão do estudo de caso, síntese)
+**Recursos necessários:** …
+**Tempo estimado:** …
+**Aplicação prática:** …
+**Verificação da aprendizagem:** …
+
+${FORMATO_MD}`;
+  }
+  if (tipo === "trabalhos") {
+    return `Com base na ementa da disciplina "${S.d.nome}", apresente 10 sugestões de Trabalho Final para os alunos da Escola MENTOR.
+
+EMENTA APROVADA:
+${em}
+
+Cada sugestão deve conter:
+## N. Nome do trabalho
+**Objetivo:** …
+**Público-alvo:** …
+**Descrição:** …
+**Forma de execução:** …
+**Critérios de avaliação:** (com pontuação somando 6,0 pontos, que é o valor máximo do Trabalho Final no MENTOR)
+**Indicadores de desempenho:** …
+**Prazo:** …
+**Estimativa de custo:** …
+
+Varie os formatos (pesquisa escrita, projeto ministerial, ação na igreja local, produção de material, apresentação). Os trabalhos devem ser viáveis para uma igreja local.${extra}
+
+${FORMATO_MD}`;
+  }
+}
+function podcastPalavras() { return Math.round(+ls.get("mc_pod_min", "30") * 140); }
+
+/* ---------------- 4. Materiais ---------------- */
+function abaMateriais() {
+  if (!S.d.ementa_aprovada) { $("#aba").innerHTML = `<div class="empty">Aprove a ementa e escreva a apostila primeiro.<br><br><button class="btn pri" onclick="irAba('ementa')">Ir para a Ementa</button></div>`; return; }
+  const tipos = [["quiz", "Quizzes"], ["podcast", "Podcasts"], ["planos", "Planos de aula"], ["trabalhos", "Trabalhos finais"]];
+  const porUni = S.matTipo === "quiz" || S.matTipo === "podcast";
+  const u = porUni ? S.matUni : 0;
+  let extra = "";
+  if (S.matTipo === "quiz") extra = `<div class="row small" style="margin-bottom:10px">Questões: <select id="qN" style="width:auto">${[5, 10, 15, 20].map(n => `<option ${+ls.get("mc_quiz_n", "10") === n ? "selected" : ""}>${n}</option>`).join("")}</select></div>`;
+  if (S.matTipo === "podcast") extra = `<div class="row small" style="margin-bottom:10px">Duração: <select id="pMin" style="width:auto">${[15, 30, 45, 60].map(n => `<option value="${n}" ${+ls.get("mc_pod_min", "30") === n ? "selected" : ""}>${n} minutos</option>`).join("")}</select></div>`;
+  if (S.matTipo === "planos") extra = `<div class="row small" style="margin-bottom:10px">Duração de cada aula: <input type="text" id="aDur" style="width:180px" value="${esc(ls.get("mc_aula_dur", "120 minutos"))}"></div>`;
+  $("#aba").innerHTML = `
+    <div class="pills" style="margin-bottom:10px">${tipos.map(([t, n]) => `<button class="pill ${S.matTipo === t ? "on" : ""}" onclick="trocarMat('${t}')">${n}</button>`).join("")}</div>
+    ${porUni ? `<div class="pills" style="margin-bottom:14px">${[1, 2, 3, 4].map(n => {
+      const tem = doc(S.matTipo, n)?.conteudo, base = doc("unidade", n)?.conteudo;
+      return `<button class="pill ${S.matUni === n ? "on" : ""}" onclick="trocarMatUni(${n})">Unidade ${n} ${tem ? `<span class="tag gold">✓</span>` : base ? "" : `<span class="tag">sem apostila</span>`}</button>`;
+    }).join("")}</div>` : ""}
+    <div id="painel"></div>`;
+  painelDoc(S.matTipo, u, extra);
+  const q = $("#qN"); if (q) q.onchange = () => ls.set("mc_quiz_n", q.value);
+  const p = $("#pMin"); if (p) p.onchange = () => ls.set("mc_pod_min", p.value);
+  const a = $("#aDur"); if (a) a.onchange = () => ls.set("mc_aula_dur", a.value);
+}
+function trocarMat(t) { if (S.busy) return toast("Aguarde a geração terminar."); if (S.editando && !confirm("Sair sem salvar a edição?")) return; S.editando = null; S.matTipo = t; abaMateriais(); }
+function trocarMatUni(n) { if (S.busy) return toast("Aguarde a geração terminar."); if (S.editando && !confirm("Sair sem salvar a edição?")) return; S.editando = null; S.matUni = n; abaMateriais(); }
+
+/* ---------------- 5. Exportar ---------------- */
+function abaExportar() {
+  const item = (rotulo, sub, onclick, ok) => `<div class="row" style="justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)">
+    <div><b>${rotulo}</b><div class="muted small">${sub}</div></div>
+    <button class="btn sm ${ok ? "pri" : ""}" ${ok ? "" : "disabled"} onclick="${onclick}">⬇ Word</button></div>`;
+  const nU = [1, 2, 3, 4].filter(n => doc("unidade", n)?.conteudo).length;
+  const nQ = [1, 2, 3, 4].filter(n => doc("quiz", n)?.conteudo).length;
+  const nP = [1, 2, 3, 4].filter(n => doc("podcast", n)?.conteudo).length;
+  $("#aba").innerHTML = `<div class="card" style="max-width:820px">
+    <h2>Exportar para Word</h2>
+    <p class="muted small">Os arquivos saem já formatados (capa, títulos, citações, tabelas e numeração de páginas). Você não precisa mexer no Word.</p>
+    ${item("Ementa", S.d.ementa ? (S.d.ementa_aprovada ? "Aprovada" : "Ainda não aprovada") : "Não gerada", "exportar('ementa')", !!S.d.ementa)}
+    ${item("Apostila completa", `Capa, sumário e as ${nU} unidade(s) escritas`, "exportar('apostila')", nU > 0)}
+    ${[1, 2, 3, 4].map(n => item(`Unidade ${n}`, doc("unidade", n)?.conteudo ? fmtN(doc("unidade", n).palavras) + " palavras" : "Não escrita", `exportar('unidade',${n})`, !!doc("unidade", n)?.conteudo)).join("")}
+    ${item("Quizzes (versão do professor)", `${nQ} de 4 · com gabarito`, "exportar('quizzes')", nQ > 0)}
+    ${item("Quizzes (versão do aluno)", `${nQ} de 4 · sem gabarito`, "exportar('quizzes-aluno')", nQ > 0)}
+    ${item("Roteiros de podcast", `${nP} de 4`, "exportar('podcasts')", nP > 0)}
+    ${item("Planos de aula", doc("planos")?.conteudo ? "Gerados" : "Não gerados", "exportar('planos',0)", !!doc("planos")?.conteudo)}
+    ${item("Trabalhos finais", doc("trabalhos")?.conteudo ? "Gerados" : "Não gerados", "exportar('trabalhos',0)", !!doc("trabalhos")?.conteudo)}
+  </div>`;
+}
+
+/* ---------------- Markdown → HTML ---------------- */
+const ALT = /^\s*[A-Ea-e][).]\s+\S/; // alternativas de quiz: A) ... E)
+function mdBlocos(md) {
+  const L = String(md || "").replace(/\r/g, "").split("\n"), out = [];
+  let i = 0;
+  const isTab = l => /^\s*\|.*\|\s*$/.test(l);
+  while (i < L.length) {
+    let l = L[i];
+    if (!l.trim()) { i++; continue; }
+    let m;
+    if ((m = l.match(/^(#{1,4})\s+(.*)$/))) { out.push({ t: "h", n: m[1].length, x: m[2].trim() }); i++; continue; }
+    if (/^\s*(-{3,}|\*{3,}|_{3,})\s*$/.test(l)) { out.push({ t: "hr" }); i++; continue; }
+    if (isTab(l) && i + 1 < L.length && /^\s*\|?\s*:?-{2,}/.test(L[i + 1])) {
+      const linhas = [];
+      while (i < L.length && isTab(L[i])) { linhas.push(L[i]); i++; }
+      const rows = linhas.filter((r, k) => k !== 1).map(r => r.trim().replace(/^\||\|$/g, "").split("|").map(c => c.trim()));
+      out.push({ t: "tab", rows }); continue;
+    }
+    if (/^\s*>/.test(l)) {
+      const q = []; while (i < L.length && /^\s*>/.test(L[i])) { q.push(L[i].replace(/^\s*>\s?/, "")); i++; }
+      out.push({ t: "q", x: q.join(" ").trim() }); continue;
+    }
+    if (/^\s*[-*•]\s+/.test(l)) {
+      const it = []; while (i < L.length && /^\s*[-*•]\s+/.test(L[i])) { it.push(L[i].replace(/^\s*[-*•]\s+/, "")); i++; }
+      out.push({ t: "ul", it }); continue;
+    }
+    if (/^\s*\d+[.)]\s+/.test(l)) {
+      const it = [], start = +l.match(/^\s*(\d+)/)[1];
+      while (i < L.length && /^\s*\d+[.)]\s+/.test(L[i])) { it.push(L[i].replace(/^\s*\d+[.)]\s+/, "")); i++; }
+      out.push({ t: "ol", it, start }); continue;
+    }
+    if (ALT.test(l)) { out.push({ t: "p", x: l.trim(), alt: true }); i++; continue; }
+    const p = [];
+    while (i < L.length && L[i].trim() && !ALT.test(L[i]) && !/^(#{1,4})\s|^\s*>|^\s*[-*•]\s+|^\s*\d+[.)]\s+/.test(L[i]) && !(isTab(L[i]) && i + 1 < L.length && /^\s*\|?\s*:?-{2,}/.test(L[i + 1]))) { p.push(L[i].trim()); i++; }
+    if (p.length) out.push({ t: "p", x: p.join(" ") }); else i++;
+  }
+  return out;
+}
+function inl(s) {
+  return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*([^*\s][^*]*?)\*/g, "$1<em>$2</em>");
+}
+function mdHtml(md) {
+  return mdBlocos(md).map(b => {
+    if (b.t === "h") return `<h${b.n}>${inl(b.x)}</h${b.n}>`;
+    if (b.t === "p") return b.alt ? `<p style="margin:0 0 6px 18px">${inl(b.x)}</p>` : `<p>${inl(b.x)}</p>`;
+    if (b.t === "q") return `<blockquote>${inl(b.x)}</blockquote>`;
+    if (b.t === "ul") return `<ul>${b.it.map(x => `<li>${inl(x)}</li>`).join("")}</ul>`;
+    if (b.t === "ol") return `<ol start="${b.start}">${b.it.map(x => `<li>${inl(x)}</li>`).join("")}</ol>`;
+    if (b.t === "hr") return "<hr>";
+    if (b.t === "tab") return `<table>${b.rows.map((r, k) => `<tr>${r.map(c => k ? `<td>${inl(c)}</td>` : `<th>${inl(c)}</th>`).join("")}</tr>`).join("")}</table>`;
+    return "";
+  }).join("");
+}
+
+/* ---------------- Exportação Word ---------------- */
+let docxPronto = null;
+async function exportar(tipo, u) {
+  try {
+    if (!docxPronto) docxPronto = carregarScript("https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js");
+    await docxPronto;
+    const d = S.d, slug = d.nome.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    let partes = [], subtitulo = "", nomeArq = "", sumario = false;
+    const conteudo = (t, n) => doc(t, n)?.conteudo;
+    if (tipo === "ementa") { partes = [ementaParaTexto(EM())]; subtitulo = "Ementa"; nomeArq = "ementa"; }
+    else if (tipo === "unidade") { partes = [conteudo("unidade", u)]; subtitulo = tituloDoc("unidade", u); nomeArq = "unidade-" + u; }
+    else if (tipo === "apostila") { partes = [1, 2, 3, 4].map(n => conteudo("unidade", n)).filter(Boolean); subtitulo = "Apostila"; nomeArq = "apostila"; sumario = true; }
+    else if (tipo === "quiz") { partes = [conteudo("quiz", u)]; subtitulo = tituloDoc("quiz", u); nomeArq = "quiz-unidade-" + u; }
+    else if (tipo === "quizzes" || tipo === "quizzes-aluno") {
+      partes = [1, 2, 3, 4].map(n => conteudo("quiz", n)).filter(Boolean);
+      if (tipo === "quizzes-aluno") partes = partes.map(semGabarito);
+      subtitulo = tipo === "quizzes" ? "Quizzes — versão do professor" : "Quizzes"; nomeArq = tipo === "quizzes" ? "quizzes-professor" : "quizzes-aluno";
+    }
+    else if (tipo === "podcast") { partes = [conteudo("podcast", u)]; subtitulo = tituloDoc("podcast", u); nomeArq = "podcast-unidade-" + u; }
+    else if (tipo === "podcasts") { partes = [1, 2, 3, 4].map(n => conteudo("podcast", n)).filter(Boolean); subtitulo = "Roteiros de podcast"; nomeArq = "podcasts"; }
+    else if (tipo === "planos") { partes = [conteudo("planos", 0)]; subtitulo = "Planos de aula"; nomeArq = "planos-de-aula"; }
+    else if (tipo === "trabalhos") { partes = [conteudo("trabalhos", 0)]; subtitulo = "Sugestões de trabalho final"; nomeArq = "trabalhos-finais"; }
+    if (!partes.length) return toast("Nada para exportar ainda.");
+    const blob = await montarDocx({ disciplina: d.nome, subtitulo, partes, sumario });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = `${slug}-${nomeArq}.docx`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    toast("Word gerado ✓");
+  } catch (e) { toast("Erro ao gerar o Word: " + e.message, 6000); }
+}
+function semGabarito(md) { return String(md).split(/^##\s+Gabarito.*$/m)[0].trim(); }
+
+async function montarDocx({ disciplina, subtitulo, partes, sumario }) {
+  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle, Footer, PageNumber, ShadingType, LevelFormat } = docx;
+  const NAVY = "0F1B33", GOLD = "B08A1E", FONTE = "Georgia";
+  const runs = (s, base = {}) => {
+    const out = [], re = /(\*\*[^*]+\*\*|\*[^*\s][^*]*\*)/g; let last = 0, m;
+    s = String(s);
+    while ((m = re.exec(s))) {
+      if (m.index > last) out.push(new TextRun({ text: s.slice(last, m.index), ...base }));
+      const tk = m[0];
+      if (tk.startsWith("**")) out.push(new TextRun({ text: tk.slice(2, -2), bold: true, ...base }));
+      else out.push(new TextRun({ text: tk.slice(1, -1), italics: true, ...base }));
+      last = m.index + tk.length;
+    }
+    if (last < s.length) out.push(new TextRun({ text: s.slice(last), ...base }));
+    return out.length ? out : [new TextRun({ text: "", ...base })];
+  };
+  const borda = { style: BorderStyle.SINGLE, size: 4, color: "C9B88A" };
+  let numRef = 0;
+  const numberingConfig = [];
+  const paraBlocos = (md, primeira) => {
+    const out = [];
+    let primeiroH1 = true;
+    for (const b of mdBlocos(md)) {
+      if (b.t === "h") {
+        const nivel = [HeadingLevel.HEADING_1, HeadingLevel.HEADING_2, HeadingLevel.HEADING_3, HeadingLevel.HEADING_4][b.n - 1];
+        out.push(new Paragraph({ heading: nivel, children: runs(b.x.replace(/\*\*/g, "")), pageBreakBefore: b.n === 1 && !(primeira && primeiroH1) }));
+        if (b.n === 1) primeiroH1 = false;
+      } else if (b.t === "p" && b.alt) out.push(new Paragraph({ children: runs(b.x), indent: { left: 360 }, spacing: { after: 60 } }));
+      else if (b.t === "p") out.push(new Paragraph({ children: runs(b.x), alignment: AlignmentType.JUSTIFIED }));
+      else if (b.t === "q") out.push(new Paragraph({ style: "Citacao", children: runs(b.x) }));
+      else if (b.t === "ul") b.it.forEach(x => out.push(new Paragraph({ children: runs(x), bullet: { level: 0 }, spacing: { after: 80 } })));
+      else if (b.t === "ol") {
+        const ref = "num" + (numRef++);
+        numberingConfig.push({ reference: ref, levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", start: b.start || 1, alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 360 } } } }] });
+        b.it.forEach(x => out.push(new Paragraph({ children: runs(x), numbering: { reference: ref, level: 0 }, spacing: { after: 80 } })));
+      }
+      else if (b.t === "hr") out.push(new Paragraph({ border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "C9A227", space: 1 } }, spacing: { after: 200 } }));
+      else if (b.t === "tab") {
+        const nc = Math.max(...b.rows.map(r => r.length));
+        out.push(new Table({
+          width: { size: 100, type: WidthType.PERCENTAGE },
+          rows: b.rows.map((r, k) => new TableRow({
+            tableHeader: k === 0,
+            children: Array.from({ length: nc }, (_, c) => new TableCell({
+              shading: k === 0 ? { type: ShadingType.CLEAR, fill: "F1E7C8", color: "auto" } : undefined,
+              borders: { top: borda, bottom: borda, left: borda, right: borda },
+              margins: { top: 80, bottom: 80, left: 100, right: 100 },
+              children: [new Paragraph({ spacing: { after: 0, line: 260 }, children: runs(r[c] || "", { size: 20, bold: k === 0 || undefined }) })]
+            }))
+          }))
+        }));
+        out.push(new Paragraph({ spacing: { after: 120 }, children: [] }));
+      }
+    }
+    return out;
+  };
+  // Capa
+  const ano = new Date().getFullYear();
+  const capa = [
+    new Paragraph({ spacing: { before: 2200, after: 120 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: "ESCOLA MENTOR", font: FONTE, size: 36, bold: true, color: NAVY, characterSpacing: 60 })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 }, children: [new TextRun({ text: "Ministério · Ensino · Teologia · Orientação", font: FONTE, size: 22, italics: true, color: GOLD })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 1400 }, children: [new TextRun({ text: "CURSO TEOLÓGICO", font: FONTE, size: 20, color: "555555", characterSpacing: 80 })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, border: { top: { style: BorderStyle.SINGLE, size: 12, color: "C9A227", space: 12 }, bottom: { style: BorderStyle.SINGLE, size: 12, color: "C9A227", space: 12 } }, spacing: { after: 300 },
+      children: [new TextRun({ text: disciplina, font: FONTE, size: 56, bold: true, color: NAVY })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 2600 }, children: [new TextRun({ text: subtitulo, font: FONTE, size: 30, color: GOLD })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Igreja Vidas", font: FONTE, size: 24, bold: true, color: NAVY })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: String(ano), font: FONTE, size: 22, color: "555555" })] })
+  ];
+  // Sumário montado a partir dos títulos (sem campos do Word)
+  const corpo = [];
+  if (sumario) {
+    corpo.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Sumário")] }));
+    partes.forEach(md => {
+      mdBlocos(md).filter(b => b.t === "h" && b.n <= 2).forEach(b => {
+        corpo.push(new Paragraph({ spacing: { after: b.n === 1 ? 60 : 20, before: b.n === 1 ? 160 : 0 }, indent: { left: b.n === 1 ? 0 : 400 },
+          children: [new TextRun({ text: b.x.replace(/\*\*/g, ""), bold: b.n === 1, color: b.n === 1 ? NAVY : "333333", size: b.n === 1 ? 24 : 21 })] }));
+      });
+    });
+  }
+  partes.forEach((md, k) => corpo.push(...paraBlocos(md, k === 0 && !sumario)));
+  const rodape = new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [
+    new TextRun({ text: `MENTOR · ${disciplina} · `, size: 16, color: "888888" }),
+    new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888" })] })] });
+  const documento = new Document({
+    creator: "MENTOR Currículo", title: `${disciplina} — ${subtitulo}`,
+    numbering: { config: numberingConfig },
+    styles: {
+      default: { document: { run: { font: FONTE, size: 23, color: "1F1F1F" }, paragraph: { spacing: { after: 160, line: 312 } } } },
+      paragraphStyles: [
+        { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true, run: { font: FONTE, size: 40, bold: true, color: NAVY }, paragraph: { spacing: { before: 0, after: 300 }, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: "C9A227", space: 8 } } } },
+        { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true, run: { font: FONTE, size: 30, bold: true, color: NAVY }, paragraph: { spacing: { before: 420, after: 160 }, keepNext: true } },
+        { id: "Heading3", name: "Heading 3", basedOn: "Normal", next: "Normal", quickFormat: true, run: { font: FONTE, size: 25, bold: true, color: GOLD }, paragraph: { spacing: { before: 280, after: 120 }, keepNext: true } },
+        { id: "Heading4", name: "Heading 4", basedOn: "Normal", next: "Normal", quickFormat: true, run: { font: FONTE, size: 23, bold: true, italics: true, color: NAVY }, paragraph: { spacing: { before: 200, after: 100 }, keepNext: true } },
+        { id: "Citacao", name: "Citação bíblica", basedOn: "Normal", next: "Normal", run: { italics: true, color: "3A3A3A" }, paragraph: { indent: { left: 567, right: 567 }, spacing: { before: 120, after: 200 }, border: { left: { style: BorderStyle.SINGLE, size: 18, color: "C9A227", space: 10 } } } }
+      ]
+    },
+    sections: [
+      { properties: { page: { margin: { top: 1418, bottom: 1418, left: 1701, right: 1134 } } }, children: capa },
+      { properties: { page: { margin: { top: 1418, bottom: 1418, left: 1701, right: 1134 } } }, footers: { default: rodape }, children: corpo }
+    ]
+  });
+  return Packer.toBlob(documento);
+}
+
+/* ---------------- Ajustes ---------------- */
+function abrirAjustes() {
+  if (!S.user) return;
+  const temChave = !!ls.get("mc_anthropic_key");
+  modal(`<h3>Ajustes</h3><div class="stack">
+    <div class="note">Versão instalada: <b>v${APP_VERSION}</b> <span id="ajVer" class="muted"></span></div>
+    <div class="row"><button class="btn sm" onclick="atualizarApp()">↻ Atualizar app</button><button class="btn sm" onclick="sair()">Sair (${esc(S.user.email)})</button></div>
+    <hr style="border:0;border-top:1px solid var(--line);width:100%">
+    <div><label class="f">Chave da API da Anthropic <span class="muted">(fica só neste aparelho)</span></label>
+      <input type="password" id="ajK" placeholder="${temChave ? "•••••••• (já salva; cole outra para trocar)" : "sk-ant-..."}">
+      <div class="muted small">Pegue em console.anthropic.com → API Keys.</div></div>
+    <details><summary class="small" style="cursor:pointer">Usar um Worker do Cloudflare em vez da chave (opcional)</summary>
+      <div class="stack" style="margin-top:10px">
+      <div><label class="f">Endereço do Worker</label><input type="text" id="ajW" value="${esc(ls.get("mc_worker_url", ""))}" placeholder="https://mentor-curriculo.SEU-USUARIO.workers.dev"></div>
+      <div><label class="f">Senha do Worker</label><input type="password" id="ajWT" value="${esc(ls.get("mc_worker_token", ""))}"></div>
+      <div class="muted small">Se o Worker estiver preenchido, o app usa ele e ignora a chave acima.</div></div></details>
+    <div><label class="f">Modelo da IA</label><select id="ajM">${MODELOS.map(m => `<option value="${m.id}" ${S.cfg.modelo === m.id ? "selected" : ""}>${m.nome}</option>`).join("")}</select></div>
+    <div><label class="f">Bibliografia padrão da Escola MENTOR <span class="muted">(uma obra por linha; vale para todas as disciplinas)</span></label>
+      <textarea id="ajB" style="min-height:140px">${esc(S.cfg.bibliografia_padrao || "")}</textarea></div>
+    <details><summary class="small" style="cursor:pointer">Perfil teológico e pedagógico usado pela IA</summary>
+      <textarea id="ajP" style="min-height:260px;margin-top:8px;font-size:14px">${esc(S.cfg.perfil || PERFIL_PADRAO)}</textarea>
+      <button class="btn sm" style="margin-top:6px" onclick="$('#ajP').value=PERFIL_PADRAO">Restaurar o padrão</button></details>
+    <div class="row" style="justify-content:flex-end"><button class="btn" data-x>Fechar</button><button class="btn pri" data-ok>Salvar ajustes</button></div>
+  </div>`, (m, close) => {
+    verificarVersao().then(v => { const el = $("#ajVer", m); if (el) el.textContent = v ? (v === APP_VERSION ? "· é a mais recente" : "· publicada: v" + v) : ""; });
+    $("[data-x]", m).onclick = close;
+    $("[data-ok]", m).onclick = async () => {
+      const k = $("#ajK", m).value.trim(); if (k) ls.set("mc_anthropic_key", k);
+      const w = $("#ajW", m).value.trim(); w ? ls.set("mc_worker_url", w) : ls.del("mc_worker_url");
+      ls.set("mc_worker_token", $("#ajWT", m).value);
+      const campos = { bibliografia_padrao: $("#ajB", m).value.trim(), perfil: $("#ajP", m).value.trim() || PERFIL_PADRAO, modelo: $("#ajM", m).value, updated_at: new Date().toISOString() };
+      const { error } = await S.sb.from("mc_config").upsert({ user_id: S.user.id, ...campos });
+      if (error) return toast("Erro: " + traduzErro(error.message));
+      Object.assign(S.cfg, campos); close(); toast("Ajustes salvos ✓");
+      if (S.d) render(); else irInicio();
+    };
+  });
+}
+
+window.addEventListener("beforeunload", e => { if (S.busy) { e.preventDefault(); e.returnValue = ""; } });
+iniciar();
+</script>
+</body>
+</html>

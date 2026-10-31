@@ -1,0 +1,14 @@
+{
+  "name": "MENTOR Currículo",
+  "short_name": "Currículo",
+  "description": "Ementas, apostilas, quizzes, podcasts e planos de aula do Curso Teológico MENTOR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0F1B33",
+  "theme_color": "#0F1B33",
+  "icons": [
+    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icone.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" }
+  ]
+}
