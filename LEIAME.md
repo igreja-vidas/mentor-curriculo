@@ -43,3 +43,10 @@ App da Escola MENTOR para gerar **ementa → apostila (4 unidades) → quizzes, 
 ## Atualizar o app
 
 Quando eu enviar uma versão nova, substitua o `index.html` no GitHub. O app mostra sozinho a faixa **"Há uma versão nova… Atualizar agora"**. Também há o botão **↻ Atualizar app** nos Ajustes. A versão aparece no topo da tela.
+
+## Novidades da v1.1.0
+
+- **Custo real por disciplina:** cada geração registra os tokens usados e o valor em dólar. O custo aparece no topo da disciplina (toque para ver o detalhe), em cada material e na tela inicial. Em ⚙ Ajustes você pode informar a cotação do dólar para ver também em reais.
+- **Podcast no formato de videoaula:** poucas perguntas profundas do apresentador e falas longas do professor, como numa aula. Inclui marcações *[Na tela: …]* para a edição do vídeo.
+
+**Para atualizar da v1.0.0:** rode o `supabase.sql` de novo (ele só acrescenta a tabela `mc_uso`, sem apagar nada) e substitua o `index.html` no GitHub.

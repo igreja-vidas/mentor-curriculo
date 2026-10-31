@@ -162,6 +162,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
 .modal-bg{position:fixed;inset:0;background:rgba(5,10,20,.55);z-index:50;display:grid;place-items:center;padding:16px}
 .modal{background:var(--surface);border-radius:16px;max-width:640px;width:100%;max-height:90vh;overflow:auto;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
 .modal h3{margin-bottom:10px}
+.custos th,.custos td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#0F1B33;color:#F3EBD3;padding:10px 18px;border-radius:12px;z-index:60;box-shadow:var(--shadow);border:1px solid #C9A227;max-width:92vw}
 .spin{width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:sp 0.8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
@@ -187,7 +188,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
 /* =====================================================================
    MENTOR CURRÍCULO
    ===================================================================== */
-const APP_VERSION = "1.0.0";
+const APP_VERSION = "1.1.0";
 
 // ---- Supabase da Igreja Vidas — projeto do MENTOR (URL e chave pública) ----
 const SUPABASE_URL = "https://oekcqkebsjxmsoqdphkd.supabase.co";
@@ -365,10 +366,13 @@ async function irInicio() {
   if (S.busy) return toast("Aguarde a geração terminar (ou toque em Parar).");
   S.d = null; S.docs = {};
   $("#app").innerHTML = `<div class="empty"><span class="spin"></span> Carregando…</div>`;
-  const [r1, r2] = await Promise.all([
+  const [r1, r2, r3] = await Promise.all([
     S.sb.from("mc_disciplinas").select("id,nome,carga_horaria,ementa_aprovada,updated_at").order("updated_at", { ascending: false }),
-    S.sb.from("mc_docs").select("disciplina_id,tipo,unidade,status")
+    S.sb.from("mc_docs").select("disciplina_id,tipo,unidade,status"),
+    S.sb.from("mc_uso").select("disciplina_id,custo_usd")
   ]);
+  S.custoDisc = {}; let custoTotal = 0;
+  (r3.error ? [] : r3.data || []).forEach(x => { S.custoDisc[x.disciplina_id] = (S.custoDisc[x.disciplina_id] || 0) + +x.custo_usd; custoTotal += +x.custo_usd; });
   if (r1.error) { $("#app").innerHTML = `<div class="card note warn">${esc(traduzErro(r1.error.message))}</div>`; return; }
   S.discs = r1.data || [];
   S.resumoDocs = {};
@@ -376,7 +380,7 @@ async function irInicio() {
   const semChave = !ls.get("mc_anthropic_key") && !ls.get("mc_worker_url");
   $("#app").innerHTML = `
     <div class="row" style="justify-content:space-between;align-items:flex-end">
-      <div><div class="eyebrow">Curso Teológico MENTOR</div><h1>Disciplinas</h1></div>
+      <div><div class="eyebrow">Curso Teológico MENTOR</div><h1>Disciplinas</h1>${custoTotal ? `<div class="muted small">Gasto total com IA: <b>${fmtUSD(custoTotal)}</b></div>` : ""}</div>
       <button class="btn pri" onclick="novaDisciplina()">＋ Nova disciplina</button>
     </div>
     ${semChave ? `<div class="note warn" style="margin-top:14px">Falta configurar a chave da Anthropic. Toque em <b>⚙ Ajustes</b>.</div>` : ""}
@@ -391,7 +395,7 @@ function cardDisc(d) {
   return `<div class="card disc" onclick="abrirDisciplina('${d.id}')">
     <div class="eyebrow">${d.carga_horaria ? esc(d.carga_horaria) : "Disciplina"}</div>
     <h3>${esc(d.nome)}</h3>
-    <div class="row">${d.ementa_aprovada ? `<span class="tag ok">Ementa aprovada</span>` : `<span class="tag">Ementa em preparo</span>`}</div>
+    <div class="row">${d.ementa_aprovada ? `<span class="tag ok">Ementa aprovada</span>` : `<span class="tag">Ementa em preparo</span>`}${S.custoDisc?.[d.id] ? `<span class="tag gold">${fmtUSD(S.custoDisc[d.id])}</span>` : ""}</div>
     <div class="dots">
       ${[1, 2, 3, 4].map(n => { const x = u(n); return dot("U" + n, x ? (x.status === "revisada" ? "ok" : "on") : ""); }).join("")}
       ${dot("Q", temTipo("quiz") ? "on" : "")}${dot("P", temTipo("podcast") ? "on" : "")}${dot("A", temTipo("planos") ? "on" : "")}${dot("T", temTipo("trabalhos") ? "on" : "")}
@@ -418,10 +422,12 @@ function novaDisciplina() {
 /* ---------------- Disciplina ---------------- */
 async function abrirDisciplina(id, aba) {
   $("#app").innerHTML = `<div class="empty"><span class="spin"></span> Abrindo…</div>`;
-  const [r1, r2] = await Promise.all([
+  const [r1, r2, r3] = await Promise.all([
     S.sb.from("mc_disciplinas").select("*").eq("id", id).single(),
-    S.sb.from("mc_docs").select("*").eq("disciplina_id", id)
+    S.sb.from("mc_docs").select("*").eq("disciplina_id", id),
+    S.sb.from("mc_uso").select("*").eq("disciplina_id", id)
   ]);
+  S.uso = r3.error ? [] : (r3.data || []);
   if (r1.error) return toast("Erro: " + traduzErro(r1.error.message));
   S.d = r1.data; S.docs = {};
   (r2.data || []).forEach(x => S.docs[x.tipo + ":" + x.unidade] = x);
@@ -447,7 +453,8 @@ function render() {
     <div class="disc-head">
       <div><a href="#" class="small" onclick="irInicio();return false">← Disciplinas</a>
         <h1 style="margin-top:4px">${esc(d.nome)}</h1>
-        <div class="muted small">${d.carga_horaria ? esc(d.carga_horaria) + " · " : ""}${nUni}/4 unidades escritas</div></div>
+        <div class="row small muted" style="gap:8px;margin-top:2px">${d.carga_horaria ? esc(d.carga_horaria) + " · " : ""}${nUni}/4 unidades escritas
+        <span class="tag gold" id="custoTopo" style="cursor:pointer" title="Ver custo detalhado" onclick="verCustos()">Custo: ${fmtUSD(somaUso(() => true))}</span></div></div>
       <div class="row"><button class="btn sm ghost" onclick="renomearDisciplina()">Renomear</button>
       <button class="btn sm danger" onclick="apagarDisciplina()">Apagar</button></div>
     </div>
@@ -702,7 +709,7 @@ Responda SOMENTE com um JSON válido, sem texto antes ou depois, neste formato:
   const live = $("#eLive"); $("#eGerar").disabled = true;
   live.innerHTML = `<div class="note" style="margin-top:8px"><span class="spin"></span> Gerando ementa… <span id="eCnt"></span> <button class="btn sm" onclick="pararGeracao()">Parar</button></div>`;
   try {
-    const r = await gerarTexto({ prompt, max_tokens: 8000, onText: t => { const c = $("#eCnt"); if (c) c.textContent = fmtN(palavras(t)) + " palavras"; } });
+    const r = await gerarTexto({ prompt, max_tokens: 8000, uso: { tipo: "ementa", u: 0, acao: "gerar" }, onText: t => { const c = $("#eCnt"); if (c) c.textContent = fmtN(palavras(t)) + " palavras"; } });
     const e = extrairJSON(r.text);
     if (!e || !Array.isArray(e.unidades) || e.unidades.length !== 4) throw new Error("A resposta não veio no formato esperado. Tente de novo.");
     e.unidades.forEach(u => { u.secoes = (u.secoes || []).slice(0, 4); while (u.secoes.length < 4) u.secoes.push({ titulo: "", escopo: "" }); });
@@ -746,6 +753,16 @@ async function chamarClaude({ system, messages, max_tokens, onText, signal }) {
   }
   const reader = resp.body.getReader(), dec = new TextDecoder();
   let buf = "", text = "", stop = null, usage = {};
+  // Custo: soma o que esta chamada usou (se for interrompida, estima pelo tamanho do texto)
+  const contabilizar = () => {
+    let tin = (usage.input_tokens || 0) + (usage.cache_creation_input_tokens || 0) + (usage.cache_read_input_tokens || 0);
+    let tout = usage.output_tokens || 0, est = false;
+    if (!tin) { tin = Math.round(JSON.stringify(body).length / 3.6); est = true; }
+    if (!tout || !stop) { tout = Math.max(tout, Math.round(text.length / 3.6)); est = est || !stop; }
+    const u = S.usoAtual; if (!u) return;
+    u.tin += tin; u.tout += tout; u.usd += custoUSD(body.model, tin, tout); u.modelo = body.model; if (est) u.estimado = true;
+  };
+  try {
   while (true) {
     const { value, done } = await reader.read();
     if (done) break;
@@ -761,11 +778,78 @@ async function chamarClaude({ system, messages, max_tokens, onText, signal }) {
       else if (ev.type === "error") throw new Error("Erro da Anthropic: " + (ev.error?.message || "desconhecido"));
     }
   }
+  } catch (e) { contabilizar(); throw e; }
+  contabilizar();
   return { text, stop, usage };
 }
+
+/* ---------------- Custos ---------------- */
+// US$ por milhão de tokens — tabela oficial da Anthropic (out/2026)
+const PRECOS = {
+  "claude-sonnet-5-5": { in: 2, out: 10 },
+  "claude-opus-5-5": { in: 4, out: 20 },
+  "claude-haiku-5-5": { in: 0.10, out: 0.50, limite: 100000, inLongo: 0.50, outLongo: 2.50 }
+};
+function custoUSD(modelo, tin, tout) {
+  const p = PRECOS[modelo] || PRECOS["claude-sonnet-5-5"];
+  const longo = p.limite && tin > p.limite;
+  return (tin * (longo ? p.inLongo : p.in) + tout * (longo ? p.outLongo : p.out)) / 1e6;
+}
+function fmtUSD(v) {
+  v = +v || 0;
+  const d = v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  let s = v > 0 && v < 0.01 ? "< US$ 0,01" : "US$ " + d;
+  const dolar = parseFloat(String(ls.get("mc_dolar", "")).replace(",", "."));
+  if (dolar > 0 && v >= 0.01) s += ` (≈ R$ ${(v * dolar).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })})`;
+  return s;
+}
+const somaUso = filtro => (S.uso || []).filter(filtro).reduce((a, x) => a + (+x.custo_usd || 0), 0);
+async function registrarUso(ctx, u) {
+  if (!S.d || !u || !(u.tin + u.tout)) return;
+  const reg = {
+    user_id: S.user.id, disciplina_id: S.d.id, tipo: ctx.tipo, unidade: ctx.u || 0, acao: ctx.acao || "gerar",
+    modelo: u.modelo, tokens_in: u.tin, tokens_out: u.tout, custo_usd: +u.usd.toFixed(6), estimado: !!u.estimado
+  };
+  const { data, error } = await S.sb.from("mc_uso").insert(reg).select().single();
+  if (error) {
+    if (!S.avisoUso) { S.avisoUso = true; toast("O custo não foi registrado: rode o supabase.sql atualizado (tabela mc_uso).", 8000); }
+    return;
+  }
+  (S.uso ||= []).push(data); atualizarCustoTopo();
+}
+function atualizarCustoTopo() {
+  const el = $("#custoTopo"); if (el && S.d) el.textContent = "Custo: " + fmtUSD(somaUso(() => true));
+  const cp = $("#custoPeca"); if (cp) cp.textContent = fmtUSD(somaUso(x => x.tipo === cp.dataset.tipo && x.unidade === +cp.dataset.u));
+}
+function verCustos() {
+  const linhas = [["ementa", 0, "Ementa"], ...[1, 2, 3, 4].map(n => ["unidade", n, "Unidade " + n]),
+    ...[1, 2, 3, 4].map(n => ["quiz", n, "Quiz da Unidade " + n]), ...[1, 2, 3, 4].map(n => ["podcast", n, "Podcast da Unidade " + n]),
+    ["planos", 0, "Planos de aula"], ["trabalhos", 0, "Trabalhos finais"]];
+  const reg = S.uso || [];
+  const tr = linhas.map(([t, n, nome]) => {
+    const r = reg.filter(x => x.tipo === t && x.unidade === n); if (!r.length) return "";
+    const est = r.some(x => x.estimado);
+    const acoes = r.reduce((a, x) => (a[x.acao] = (a[x.acao] || 0) + 1, a), {});
+    const desc = Object.entries(acoes).map(([k, v]) => `${v} ${{ gerar: v > 1 ? "gerações" : "geração", continuar: v > 1 ? "continuações" : "continuação", ajustar: v > 1 ? "ajustes" : "ajuste" }[k] || k}`).join(", ");
+    return `<tr><td>${nome}${est ? " *" : ""}</td><td class="muted small">${desc}</td><td class="small">${fmtN(r.reduce((a, x) => a + x.tokens_in, 0))} / ${fmtN(r.reduce((a, x) => a + x.tokens_out, 0))}</td><td style="text-align:right;white-space:nowrap"><b>${fmtUSD(r.reduce((a, x) => a + +x.custo_usd, 0))}</b></td></tr>`;
+  }).join("");
+  const porModelo = Object.entries(reg.reduce((a, x) => (a[x.modelo] = (a[x.modelo] || 0) + +x.custo_usd, a), {}))
+    .map(([m, v]) => `${(MODELOS.find(x => x.id === m)?.nome || m).split(" (")[0]}: ${fmtUSD(v)}`).join(" · ");
+  modal(`<h3>Custo de ${esc(S.d.nome)}</h3>
+    ${reg.length ? `<div style="overflow-x:auto"><table class="custos" style="width:100%;border-collapse:collapse;font-size:15px">
+      <tr><th style="text-align:left">Material</th><th style="text-align:left">Chamadas</th><th style="text-align:left">Tokens lidos / escritos</th><th style="text-align:right">Custo</th></tr>
+      ${tr}
+      <tr><td colspan="3"><b>Total da disciplina</b></td><td style="text-align:right;white-space:nowrap"><b>${fmtUSD(somaUso(() => true))}</b></td></tr></table></div>
+      <p class="muted small">${porModelo}</p>
+      <p class="muted small">Calculado com os tokens informados pela Anthropic em cada chamada e a tabela oficial de preços. Inclui gerações refeitas e ajustes. ${reg.some(x => x.estimado) ? "* Contém gerações interrompidas, cujo valor foi estimado. " : ""}Não inclui o IOF do cartão.</p>`
+      : `<p class="muted">Nenhuma geração registrada ainda nesta disciplina.</p>`}
+    <div class="row" style="justify-content:flex-end;margin-top:10px"><button class="btn" data-x>Fechar</button></div>`,
+    (m, close) => { $("[data-x]", m).onclick = close; });
+}
 /** Gera texto longo; se bater no limite, continua sozinho de onde parou. */
-async function gerarTexto({ prompt, max_tokens, onText, inicio = "", continuacoes = 2 }) {
+async function gerarTexto({ prompt, max_tokens, onText, inicio = "", continuacoes = 2, uso = null }) {
   S.busy = true; S.abort = new AbortController(); S.live = inicio;
+  S.usoAtual = { tin: 0, tout: 0, usd: 0, estimado: false, modelo: S.cfg.modelo };
   const system = (S.cfg.perfil || PERFIL_PADRAO);
   let total = inicio;
   // Junta o texto já escrito com a continuação sem quebrar palavra, frase nem título
@@ -793,7 +877,11 @@ async function gerarTexto({ prompt, max_tokens, onText, inicio = "", continuacoe
   } catch (e) {
     if (e.name === "AbortError") { const err = new Error("Geração interrompida."); err.parcial = S.live; err.parado = true; throw err; }
     e.parcial = S.live; throw e;
-  } finally { S.busy = false; S.abort = null; }
+  } finally {
+    S.busy = false; S.abort = null;
+    if (uso) registrarUso(uso, S.usoAtual);
+    S.usoAtual = null;
+  }
 }
 
 /* ---------------- 3. Apostila ---------------- */
@@ -856,7 +944,7 @@ function painelDoc(tipo, u, extraHtml = "") {
   const btnGerar = `<button class="btn sm pri" id="btnGerar" ${pode.ok ? "" : "disabled"} onclick="gerarDoc('${tipo}',${u})">✦ ${x?.conteudo ? "Gerar de novo" : "Gerar " + (tipo === "unidade" ? "unidade" : TIPOS[tipo].nome.toLowerCase())}</button>`;
   alvo.innerHTML = `
     <div class="toolbar row" style="justify-content:space-between">
-      <div><h3>${esc(titulo)}</h3>${x?.conteudo ? `<div class="muted small">${fmtN(x.palavras)} palavras · ${dataBR(x.updated_at)} ${x.status === "revisada" ? `· <span class="tag ok">✓ revisada</span>` : ""}</div>` : ""}</div>
+      <div><h3>${esc(titulo)}</h3>${x?.conteudo ? `<div class="muted small">${fmtN(x.palavras)} palavras · ${dataBR(x.updated_at)} · custo: <span id="custoPeca" data-tipo="${tipo}" data-u="${u}">${fmtUSD(somaUso(y => y.tipo === tipo && y.unidade === u))}</span> ${x.status === "revisada" ? `· <span class="tag ok">✓ revisada</span>` : ""}</div>` : ""}</div>
       <div class="row" id="docBtns">
         ${x?.conteudo ? `
           ${x.status === "parcial" ? `<button class="btn sm gold" onclick="gerarDoc('${tipo}',${u},true)">▶ Continuar geração</button>` : ""}
@@ -947,7 +1035,7 @@ async function gerarDoc(tipo, u, continuar = false) {
     if (agora - ultimoSalvo > 5000) { ultimoSalvo = agora; ls.set(chaveRasc, t); }
   };
   try {
-    const r = await gerarTexto({ prompt, max_tokens: cfgT.tokens, onText, inicio: continuar ? (x?.conteudo || "") : "" });
+    const r = await gerarTexto({ prompt, max_tokens: cfgT.tokens, onText, inicio: continuar ? (x?.conteudo || "") : "", uso: { tipo, u, acao: continuar ? "continuar" : "gerar" } });
     const limpo = limparSaida(r.text);
     await salvarDoc(tipo, u, limpo, r.completo ? "rascunho" : "parcial");
     ls.del(chaveRasc);
@@ -993,7 +1081,7 @@ ${contextoBiblio()}
 ${x.conteudo}
 </texto_completo>`;
         try {
-          const r = await gerarTexto({ prompt, max_tokens: 12000, continuacoes: 1, onText: t => { $("#ajL", m).innerHTML = `<span class="spin"></span> ${fmtN(palavras(t))} palavras…`; } });
+          const r = await gerarTexto({ prompt, max_tokens: 12000, continuacoes: 1, uso: { tipo, u, acao: "ajustar" }, onText: t => { $("#ajL", m).innerHTML = `<span class="spin"></span> ${fmtN(palavras(t))} palavras…`; } });
           let novo = limparSaida(r.text);
           if (!/^## /.test(novo)) novo = "## " + titulo + "\n\n" + novo;
           blocos[i] = novo.trimEnd() + "\n";
@@ -1102,29 +1190,40 @@ ${textoUni}
   }
   if (tipo === "podcast") {
     const min = +ls.get("mc_pod_min", "30"), pal = podcastPalavras();
-    return `Com base no texto da Unidade ${u} abaixo, escreva o roteiro do podcast da unidade da disciplina "${S.d.nome}".
+    const aprofunda = min >= 45;
+    const nResp = 6 + (aprofunda ? 2 : 0);
+    const porResp = pal * 0.85 / nResp;
+    const r50 = x => Math.round(x / 50) * 50;
+    return `Com base no texto da Unidade ${u} abaixo, escreva o roteiro do podcast da Unidade ${u} da disciplina "${S.d.nome}".
+
+CONTEXTO: o curso é EAD. Este podcast será gravado em vídeo e é a AULA que o aluno assiste, ao lado da apostila. Por isso o PROFESSOR deve ensinar de verdade, em falas longas e contínuas, como numa aula expositiva. O APRESENTADOR apenas conduz a aula com poucas perguntas, todas profundas.
 
 REGRAS
 - Duração aproximada: ${min} minutos (cerca de ${fmtN(pal)} palavras faladas).
-- Personagens: APRESENTADOR (conduz, pergunta, resume, faz a ponte com o ouvinte) e PROFESSOR (explica com profundidade e linguagem oral).
-- O conteúdo deve ser fiel à apostila: percorra as quatro seções (${u}.1 a ${u}.4) na ordem, um bloco por seção. Não introduza doutrina ou tema que não esteja na unidade; ilustrações orais novas são bem-vindas.
-- Linguagem de conversa, natural para ser lida em voz alta; frases curtas; sem leitura de listas longas.${extra}
+- APRESENTADOR: poucas intervenções, todas substanciais. No total, cerca de ${nResp} perguntas: uma de abertura, uma pergunta principal para cada seção da unidade (${u}.1 a ${u}.4)${aprofunda ? ", no máximo duas perguntas de aprofundamento nos blocos mais densos" : ""} e uma pergunta final de aplicação. Cada pergunta é aberta e profunda (por quê, como, o que isso significa para a igreja e para o ministério hoje), com 2 a 4 frases que situam o tema e fazem a ponte com a fala anterior. Proibido: sequências de perguntas curtas, interrupções no meio da explicação e interjeições do tipo "Que interessante!", "Exatamente!", "Uau!".
+- PROFESSOR: cerca de 85% do tempo de fala. Cada resposta é um bloco de aula de ${fmtN(r50(porResp * 0.85))} a ${fmtN(r50(porResp * 1.25))} palavras, em vários parágrafos: explica o conceito, lê e comenta os textos bíblicos, traz o contexto histórico e teológico, ilustra e aplica ao ministério. Linguagem oral de professor: frases claras, retomadas e transições ("repare que", "agora veja"), sem ler listas.
+- Fidelidade à apostila: percorra as quatro seções na ordem, um bloco por seção. Não introduza doutrina ou tema que não esteja na unidade; ilustrações orais novas são bem-vindas.
+- Indicações para a edição do vídeo: quando o professor citar um texto bíblico importante, acrescente numa linha própria *[Na tela: referência bíblica]*. Use de 1 a 3 por bloco.${extra}
 
 FORMATO
 # Podcast — Unidade ${u}: ${e.unidades[u - 1].titulo}
 **Tema:** …
-**Objetivo:** …
+**Objetivo da aula:** …
 **Duração estimada:** ${min} minutos
 
 ## Abertura
-**APRESENTADOR:** …
-**PROFESSOR:** …
+**APRESENTADOR:** (apresenta a aula e o professor; faz a pergunta de abertura)
+**PROFESSOR:** (resposta longa)
 ## Bloco 1 — (tema da seção ${u}.1)
+**APRESENTADOR:** (pergunta principal)
+**PROFESSOR:** (resposta longa)
 ## Bloco 2 — (tema da seção ${u}.2)
 ## Bloco 3 — (tema da seção ${u}.3)
 ## Bloco 4 — (tema da seção ${u}.4)
-## Aplicações ministeriais
 ## Encerramento
+**APRESENTADOR:** (pergunta final de aplicação)
+**PROFESSOR:** (síntese da aula e desafio ao aluno)
+**APRESENTADOR:** (despedida breve, convidando a estudar a apostila e fazer o quiz)
 
 ${FORMATO_MD}
 
@@ -1188,7 +1287,7 @@ function podcastPalavras() { return Math.round(+ls.get("mc_pod_min", "30") * 140
 /* ---------------- 4. Materiais ---------------- */
 function abaMateriais() {
   if (!S.d.ementa_aprovada) { $("#aba").innerHTML = `<div class="empty">Aprove a ementa e escreva a apostila primeiro.<br><br><button class="btn pri" onclick="irAba('ementa')">Ir para a Ementa</button></div>`; return; }
-  const tipos = [["quiz", "Quizzes"], ["podcast", "Podcasts"], ["planos", "Planos de aula"], ["trabalhos", "Trabalhos finais"]];
+  const tipos = [["quiz", "Quizzes"], ["podcast", "Podcasts (videoaulas)"], ["planos", "Planos de aula"], ["trabalhos", "Trabalhos finais"]];
   const porUni = S.matTipo === "quiz" || S.matTipo === "podcast";
   const u = porUni ? S.matUni : 0;
   let extra = "";
@@ -1439,6 +1538,8 @@ function abrirAjustes() {
       <div><label class="f">Endereço do Worker</label><input type="text" id="ajW" value="${esc(ls.get("mc_worker_url", ""))}" placeholder="https://mentor-curriculo.SEU-USUARIO.workers.dev"></div>
       <div><label class="f">Senha do Worker</label><input type="password" id="ajWT" value="${esc(ls.get("mc_worker_token", ""))}"></div>
       <div class="muted small">Se o Worker estiver preenchido, o app usa ele e ignora a chave acima.</div></div></details>
+    <div><label class="f">Cotação do dólar <span class="muted">(opcional, para ver os custos também em reais)</span></label>
+      <input type="text" id="ajD" inputmode="decimal" value="${esc(ls.get("mc_dolar", ""))}" placeholder="Ex.: 5,40"></div>
     <div><label class="f">Modelo da IA</label><select id="ajM">${MODELOS.map(m => `<option value="${m.id}" ${S.cfg.modelo === m.id ? "selected" : ""}>${m.nome}</option>`).join("")}</select></div>
     <div><label class="f">Bibliografia padrão da Escola MENTOR <span class="muted">(uma obra por linha; vale para todas as disciplinas)</span></label>
       <textarea id="ajB" style="min-height:140px">${esc(S.cfg.bibliografia_padrao || "")}</textarea></div>
@@ -1453,6 +1554,7 @@ function abrirAjustes() {
       const k = $("#ajK", m).value.trim(); if (k) ls.set("mc_anthropic_key", k);
       const w = $("#ajW", m).value.trim(); w ? ls.set("mc_worker_url", w) : ls.del("mc_worker_url");
       ls.set("mc_worker_token", $("#ajWT", m).value);
+      ls.set("mc_dolar", $("#ajD", m).value.trim());
       const campos = { bibliografia_padrao: $("#ajB", m).value.trim(), perfil: $("#ajP", m).value.trim() || PERFIL_PADRAO, modelo: $("#ajM", m).value, updated_at: new Date().toISOString() };
       const { error } = await S.sb.from("mc_config").upsert({ user_id: S.user.id, ...campos });
       if (error) return toast("Erro: " + traduzErro(error.message));
