@@ -191,7 +191,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 
 /* =====================================================================
    MENTOR CURRÍCULO
    ===================================================================== */
-const APP_VERSION = "1.2.0";
+const APP_VERSION = "1.3.0";
 
 // ---- Supabase da Igreja Vidas — projeto do MENTOR (URL e chave pública) ----
 const SUPABASE_URL = "https://oekcqkebsjxmsoqdphkd.supabase.co";
@@ -1344,7 +1344,63 @@ function abaExportar() {
     ${item("Roteiros de podcast", `${nP} de 4`, "exportar('podcasts')", nP > 0)}
     ${item("Planos de aula", doc("planos")?.conteudo ? "Gerados" : "Não gerados", "exportar('planos',0)", !!doc("planos")?.conteudo)}
     ${item("Trabalhos finais", doc("trabalhos")?.conteudo ? "Gerados" : "Não gerados", "exportar('trabalhos',0)", !!doc("trabalhos")?.conteudo)}
+  </div>
+  <div class="card" style="max-width:820px;margin-top:14px">
+    <h2>Enviar para o app MENTOR</h2>
+    <p class="muted small">Gera um arquivo com os quizzes no formato do app MENTOR (alunos). Lá, em <b>Matérias → Editar → Quizzes da Matéria → Importar de arquivo</b>, escolha este arquivo. Cada quiz deve ter no máximo 10 questões.</p>
+    <div class="row" style="justify-content:space-between;padding:10px 0">
+      <div><b>Quizzes para o MENTOR</b><div class="muted small">${nQ} de 4 · com gabarito · arquivo .json</div></div>
+      <button class="btn sm ${nQ > 0 ? "pri" : ""}" ${nQ > 0 ? "" : "disabled"} onclick="exportarQuizzesMentor()">⬇ .json</button>
+    </div>
   </div>`;
+}
+
+/* ---------------- Quizzes → app MENTOR (.json) ---------------- */
+function quizMdParaMentor(md, tituloPadrao) {
+  const linhas = String(md || "").replace(/\r/g, "").split("\n");
+  const quiz = { titulo: tituloPadrao, tempoMinutos: 30, perguntas: [] }, gab = {};
+  let p = null, alt = null, noGab = false;
+  const fecha = () => { if (p) quiz.perguntas.push(p); p = null; alt = null; };
+  for (const bruta of linhas) {
+    const l = bruta.replace(/\*\*/g, "").trim(); let m;
+    if (!l) continue;
+    if ((m = l.match(/^#\s+(.*)$/))) { quiz.titulo = m[1].replace(/^quiz\s*[—–-]\s*/i, "").trim(); continue; }
+    if (/^#{2,3}\s*gabarito/i.test(l)) { fecha(); noGab = true; continue; }
+    if (noGab) { if ((m = l.match(/^(\d+)\s*[.)\-–—:]\s*\(?([A-Ea-e])\b/))) gab[+m[1]] = m[2].toUpperCase(); continue; }
+    if ((m = l.match(/^#{2,4}\s*quest[aã]o\s*(\d+)\s*[:.)-]?\s*(.*)$/i))) { fecha(); p = { n: +m[1], enunciado: m[2] || "", opcoes: [] }; continue; }
+    if (p && (m = l.match(/^\(?([A-Ea-e])[).]\s+(.*)$/))) { alt = { id: m[1].toUpperCase(), texto: m[2] }; p.opcoes.push(alt); continue; }
+    if (/^#{2,4}\s/.test(l)) continue;
+    if (p) { if (alt) alt.texto += " " + l; else p.enunciado += (p.enunciado ? " " : "") + l; }
+  }
+  fecha();
+  const problemas = [];
+  const perguntas = quiz.perguntas.map((q, i) => {
+    const correta = gab[q.n || i + 1];
+    if (q.opcoes.length !== 5) problemas.push(`questão ${i + 1}: ${q.opcoes.length} alternativas`);
+    if (!correta) problemas.push(`questão ${i + 1}: sem gabarito`);
+    return { enunciado: q.enunciado.trim(), opcoes: ["A", "B", "C", "D", "E"].map(L => (q.opcoes.find(o => o.id === L)?.texto || "").trim()), correta: correta || "" };
+  });
+  return { quiz: { titulo: quiz.titulo, tempoMinutos: quiz.tempoMinutos, perguntas }, problemas };
+}
+function exportarQuizzesMentor() {
+  const quizzes = [], avisos = [];
+  [1, 2, 3, 4].forEach(n => {
+    const md = doc("quiz", n)?.conteudo;
+    if (!md) return;
+    const { quiz, problemas } = quizMdParaMentor(md, "Unidade " + n);
+    if (quiz.perguntas.length > 10) avisos.push(`Unidade ${n}: ${quiz.perguntas.length} questões (o MENTOR aceita até 10)`);
+    problemas.forEach(x => avisos.push(`Unidade ${n}, ${x}`));
+    quizzes.push(quiz);
+  });
+  if (!quizzes.length) return toast("Nenhum quiz gerado ainda.");
+  const d = S.d, slug = d.nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const dados = { formato: "mentor-quizzes", versao: 1, disciplina: d.nome, geradoEm: new Date().toISOString(), quizzes };
+  const blob = new Blob([JSON.stringify(dados, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = `${slug}-quizzes-mentor.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast(avisos.length ? "Arquivo gerado, mas confira: " + avisos.slice(0, 3).join("; ") : `Arquivo gerado com ${quizzes.length} quiz(zes).`);
 }
 
 /* ---------------- Markdown → HTML ---------------- */
